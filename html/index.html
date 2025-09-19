@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TZ Consultoria Financeira</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;700&display=swap" rel="stylesheet">
+    <!-- Alpine.js for interactivity -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0A192F;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-element {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-600 {
+            animation-delay: 0.6s;
+        }
+
+        .delay-800 {
+            animation-delay: 0.8s;
+        }
+
+        .delay-1000 {
+            animation-delay: 1.0s;
+        }
+
+        /* Custom styles for the gradient overlay */
+        .image-gradient-overlay {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-gradient-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Gradiente simplificado para uma transição suave */
+            background: linear-gradient(to right,
+                    rgba(10, 25, 47, 1) 0%,
+                    rgba(10, 25, 47, 0.3) 50%,
+                    rgba(10, 25, 47, 0) 75%);
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body class="bg-[#0A192F] text-slate-400">
+
+    <main>
+        <!-- Navbar -->
+        <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+            <div class="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
+
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <img src="image/logosemfundo.png" alt="Logo TZ Consultoria" class="h-14 w-auto">
+                </a>
+
+                <!-- Menu Desktop -->
+                <nav class="hidden md:flex space-x-8 text-[#0A192F]">
+                    <a href="#hero" class="hover:text-[#64ffda] transition-colors">Início</a>
+                    <a href="#sobre" class="hover:text-[#64ffda] transition-colors">Sobre</a>
+                    <a href="#servicos" class="hover:text-[#64ffda] transition-colors">Serviços</a>
+                    <a href="#diferenciais" class="hover:text-[#64ffda] transition-colors">Diferenciais</a>
+                    <a href="#parceiros" class="hover:text-[#64ffda] transition-colors">Parceiros</a>
+                    <a href="#faq" class="hover:text-[#64ffda] transition-colors">FAQ</a>
+                    <a href="#instagram" class="hover:text-[#64ffda] transition-colors">Redes</a>
+                </nav>
+
+                <!-- Botão Mobile -->
+                <button id="menu-btn" class="md:hidden text-slate-200 focus:outline-none">
+                    <!-- Ícone hambúrguer -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Menu Mobile -->
+            <nav id="mobile-menu" class="hidden md:hidden bg-white px-6 pb-4 text-[#0A192F]">
+                <a href="#hero" class="block py-2 text-slate-200 hover:text-[#97e2c9]">Início</a>
+                <a href="#sobre" class="block py-2 text-slate-200 hover:text-[#97e2c9]">Sobre</a>
+                <a href="#servicos" class="block py-2 text-slate-200 hover:text-[#97e2c9]">Serviços</a>
+                <a href="#diferenciais" class="block py-2 text-slate-200 hover:text-[#97e2c9]">Diferenciais</a>
+                <a href="#parceiros" class="block py-2 text-slate-200 hover:text-[#97e2c9]">Parceiros</a>
+                <a href="#faq" class="block py-2 text-slate-200 hover:text-[#97e2c9]">faq</a>
+                <a href="#instagram" class="block py-2 text-slate-200 hover:text-[#97e2c9]">Redes</a>
+            </nav>
+        </header>
+
+        <script>
+            // Script simples para abrir/fechar menu mobile
+            const menuBtn = document.getElementById("menu-btn");
+            const mobileMenu = document.getElementById("mobile-menu");
+
+            menuBtn.addEventListener("click", () => {
+                mobileMenu.classList.toggle("hidden");
+            });
+        </script>
+
+        <!-- Seção 1: Hero -->
+        <section class="min-h-screen grid grid-cols-2" id="hero">
+            <!-- Coluna do texto -->
+            <div class="flex flex-col justify-center p-4 sm:p-8 md:p-16 bg-[#112240]">
+                <p
+                    class="text-xs sm:text-sm font-light tracking-widest text-[#97e2c9] uppercase mb-2 sm:mb-4 fade-in-element delay-200">
+                    Consultoria Financeira
+                </p>
+                <h1
+                    class="text-xl sm:text-3xl md:text-5xl text-slate-200 font-light leading-tight tracking-tight mb-4 sm:mb-6 fade-in-element delay-400">
+                    Seu Próximo Salto <span class="text-[#97e2c9] font-extralight">Financeiro</span> Começa Aqui.
+                </h1>
+                <p
+                    class="text-xs sm:text-base md:text-lg font-light mb-6 sm:mb-8 text-slate-300 fade-in-element delay-600">
+                    A consultoria financeira que transforma a gestão de empresas e a vida de profissionais liberais.
+                    Não é sobre planilhas, é sobre o seu futuro.
+                </p>
+                <div class="flex flex-wrap gap-3 sm:gap-4 fade-in-element delay-800">
+                    <a href="simulador.html"
+                        class="inline-block bg-transparent border border-[#97e2c9] text-[#97e2c9] font-normal py-2 px-4 sm:py-3 sm:px-8 rounded-md hover:bg-[#97e2c9]/10 transition-all duration-300">
+                        Simular Empréstimo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Coluna da imagem -->
+            <div class="h-full min-h-[200px] sm:min-h-[300px] md:min-h-screen image-gradient-overlay">
+                <img src="image/arranha-ceus-vista-cidade-moldura-da-janela-lider.jpg"
+                    alt="Profissionais de finanças colaborando em um ambiente de trabalho moderno"
+                    class="w-full h-full object-cover"
+                    onerror="this.onerror=null;this.src='https://placehold.co/1000/1200/0A192F/64ffda?text=Image+Not+Found';">
+            </div>
+        </section>
+
+
+        <!-- Seção 2: Como Funciona -->
+        <section
+            class="min-h-screen bg-white grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-12 lg:px-20 py-16"
+            id="sobre">
+
+            <!-- Coluna da imagem (agora na esquerda) -->
+            <div class="flex justify-center">
+                <img src="image/Screenshot 2025-09-19 013252.png" alt="Consultoria financeira"
+                    class="rounded-xl shadow-lg w-full max-w-md object-cover">
+            </div>
+
+            <!-- Coluna de texto -->
+            <div class="flex flex-col justify-center text-slate-800">
+                <h2 class="text-3xl md:text-4xl font-light text-[#0A192F] mb-6 leading-tight">
+                    Como funciona a <span class="text-[#64ffda] font-medium">TZ Consultoria?</span>
+                </h2>
+                <p class="text-slate-600 font-light text-base md:text-lg leading-relaxed mb-4">
+                    Somos uma consultoria financeira focada em transformar a sua relação com o dinheiro,
+                    seja você uma pessoa física ou uma empresa.
+                </p>
+                <p class="text-slate-600 font-light text-base md:text-lg leading-relaxed mb-8">
+                    Você não precisa mais lidar com a complexidade de gerenciar suas finanças sozinho.
+                    Buscamos as melhores estratégias personalizadas e te guiamos para que você tome decisões seguras,
+                    com a garantia de um plano claro e resultados reais.
+                </p>
+                <a href="simulador.html"
+                    class="w-fit bg-[#0A192F] text-white font-medium py-3 px-6 rounded-lg shadow-lg hover:bg-[#1a2d4a] transition-all duration-300 transform hover:scale-105">
+                    Comece sua Transformação
+                </a>
+            </div>
+        </section>
+
+        <!-- Seção 3: Nossos Serviços -->
+        <section class="bg-[#112240] py-20 px-8 md:px-16" id="servicos">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl text-slate-200 font-light fade-in-element">Soluções sob Medida para
+                        o seu Crescimento</h2>
+                    <p class="mt-4 md:text-lg text-slate-300 max-w-3xl mx-auto fade-in-element delay-200">
+                        Aqui você encontra a solução que realmente precisa para alavancar seus resultados.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div
+                        class="text-center p-8 bg-[#0A192F] rounded-lg shadow-lg fade-in-element delay-400 transition-all duration-300 transform hover:-translate-y-2 hover:bg-[#1a2d4a]">
+                        <div class="flex justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                fill="none" stroke="#97e2c9" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="12" x2="12" y1="2" y2="22" />
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-normal text-slate-200 mb-3">Crédito Subsidiado</h3>
+                        <p class="text-slate-300 font-light mb-6">
+                            Acessamos linhas de crédito com condições diferenciadas e taxas competitivas para seus
+                            projetos.
+                        </p>
+                    </div>
+                    <div
+                        class="text-center p-8 bg-[#0A192F] rounded-lg shadow-lg fade-in-element delay-600 transition-all duration-300 transform hover:-translate-y-2 hover:bg-[#1a2d4a]">
+                        <div class="flex justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                fill="none" stroke="#97e2c9" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8" />
+                                <line x1="21" x2="16.65" y1="21" y2="16.65" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-normal text-slate-200 mb-3">Diagnóstico Financeiro</h3>
+                        <p class="text-slate-300 font-light mb-6">
+                            Análise aprofundada para identificar gargalos, otimizar recursos e basear decisões em dados
+                            concretos.
+                        </p>
+
+                    </div>
+                    <div
+                        class="text-center p-8 bg-[#0A192F] rounded-lg shadow-lg fade-in-element delay-800 transition-all duration-300 transform hover:-translate-y-2 hover:bg-[#1a2d4a]">
+                        <div class="flex justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                fill="none" stroke="#97e2c9" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <circle cx="12" cy="12" r="6" />
+                                <circle cx="12" cy="12" r="2" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-normal text-slate-200 mb-3">Consultoria Estratégica</h3>
+                        <p class="text-slate-300 font-light mb-6">
+                            Desenvolvemos um plano de ação robusto e personalizado para o crescimento sustentável do seu
+                            negócio.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Seção 4: Nossos Diferenciais -->
+        <section class="bg-white py-20 px-8 md:px-16" id="diferenciais">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl text-slate-200 font-light text-[#0A192F] fade-in-element">Nossos
+                        Diferenciais</h2>
+
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div
+                        class="text-center p-8 bg-[#0A192F] rounded-full shadow-lg fade-in-element delay-400 transition-all duration-300 transform hover:-translate-y-2 hover:bg-[#1a2d4a]">
+                        <div class="flex justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                fill="none" stroke="#64ffda" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M14 19a6 6 0 0 0-12 0" />
+                                <circle cx="8" cy="10" r="4" />
+                                <path d="M22 19a6 6 0 0 0-6-5.5" />
+                                <path d="M16 10.5c0-1-1-2-2-2" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-normal text-slate-200 mb-3">Soluções Humanizadas</h3>
+                        <p class="text-slate-300 font-light mb-6">
+                            Sua história e seus objetivos são o centro de toda a nossa estratégia.
+                        </p>
+                    </div>
+                    <div
+                        class="text-center p-8 bg-[#0A192F] rounded-full shadow-lg fade-in-element delay-600 transition-all duration-300 transform hover:-translate-y-2 hover:bg-[#1a2d4a]">
+                        <div class="flex justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                fill="none" stroke="#64ffda" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                                <polyline points="16 7 22 7 22 13" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-normal text-slate-200 mb-3">Metodologia Comprovada</h3>
+                        <p class="text-slate-300 font-light mb-6">
+                            Nosso método foi validado para entregar resultados reais e mensuráveis.
+                        </p>
+
+                    </div>
+                    <div
+                        class="text-center p-8 bg-[#0A192F] rounded-full shadow-lg fade-in-element delay-800 transition-all duration-300 transform hover:-translate-y-2 hover:bg-[#1a2d4a]">
+                        <div class="flex justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                fill="none" stroke="#64ffda" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                                <path d="m9 12 2 2 4-4" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-normal text-slate-200 mb-3">Parceria de Longo Prazo</h3>
+                        <p class="text-slate-300 font-light mb-6">
+                            Estamos ao seu lado para garantir o sucesso contínuo de sua jornada financeira.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 5: Histórias de Sucesso -->
+        <section class="bg-[#0A192F] py-20 px-8 md:px-16" id="parceiros">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl text-slate-200 font-light fade-in-element">Histórias de Crescimento
+                        que Escrevemos Juntos</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <div
+                        class="bg-[#112240] p-8 rounded-lg shadow-lg flex flex-col items-center text-center transition-transform transform hover:-translate-y-2 fade-in-element delay-400">
+                        <img src="https://placehold.co/100x100/0A192F/64ffda?text=Logo" alt="Logo da Empresa do Cliente"
+                            class="w-24 h-24 rounded-full mb-6 border-2 border-[#64ffda]">
+                        <blockquote class="text-slate-300 font-light italic text-lg mb-4">
+                            "Com a TZ Consultoria, saímos de um cenário de incerteza para um crescimento sustentável. O
+                            diagnóstico financeiro foi preciso e nos deu a segurança que precisávamos para expandir."
+                        </blockquote>
+                        <p class="text-slate-200 font-normal mt-auto">- João Santos, CEO da Empresa Exemplo</p>
+                    </div>
+                    <div
+                        class="bg-[#112240] p-8 rounded-lg shadow-lg flex flex-col items-center text-center transition-transform transform hover:-translate-y-2 fade-in-element delay-600">
+                        <img src="https://placehold.co/100x100/0A192F/64ffda?text=Foto" alt="Foto do Cliente"
+                            class="w-24 h-24 rounded-full mb-6 border-2 border-[#64ffda]">
+                        <blockquote class="text-slate-300 font-light italic text-lg mb-4">
+                            "O plano estratégico da TZ Consultoria me ajudou a organizar minhas finanças e me preparou
+                            para o meu próximo grande investimento. Hoje me sinto no controle do meu futuro."
+                        </blockquote>
+                        <p class="text-slate-200 font-normal mt-auto">- Maria Oliveira, Profissional Liberal</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 6: Perguntas Frequentes -->
+        <section class="bg-white py-20 px-8 md:px-16" id="faq">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl text-slate-200 font-light text-[#0A192F] fade-in-element">Perguntas
+                        Frequentes</h2>
+                </div>
+                <div class="space-y-4 fade-in-element delay-200">
+                    <div x-data="{ open: false }" class="bg-[#0A192F] rounded-lg shadow-lg">
+                        <button @click="open = !open" class="w-full flex justify-between items-center text-left p-6">
+                            <span class="text-lg text-slate-200 font-normal ">Quem a TZ Consultoria atende?</span>
+                            <svg :class="{'rotate-180': open}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="#64ffda" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="transition-transform duration-300">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div x-show="open" x-cloak x-transition class="p-6 pt-0">
+                            <p class="text-slate-300 font-light">Atendemos empresas de todos os portes e pessoas físicas
+                                que desejam organizar e aprimorar suas finanças para alcançar objetivos de crescimento e
+                                segurança. Não atendemos Microempreendedores Individuais (MEI).</p>
+                        </div>
+                    </div>
+                    <div x-data="{ open: false }" class="bg-[#0A192F] rounded-lg shadow-lg">
+                        <button @click="open = !open" class="w-full flex justify-between items-center text-left p-6">
+                            <span class="text-lg text-slate-200 font-normal">Qual é o valor de uma consultoria?</span>
+                            <svg :class="{'rotate-180': open}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="#64ffda" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="transition-transform duration-300">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div x-show="open" x-cloak x-transition class="p-6 pt-0">
+                            <p class="text-slate-300 font-light">O valor do serviço varia de acordo com a complexidade e
+                                o escopo do projeto. Após a sua primeira consulta, faremos uma proposta personalizada
+                                que atenda às suas necessidades. Agende uma consulta inicial para obtermos uma visão
+                                clara do seu caso.</p>
+                        </div>
+                    </div>
+                    <div x-data="{ open: false }" class="bg-[#0A192F] rounded-lg shadow-lg">
+                        <button @click="open = !open" class="w-full flex justify-between items-center text-left p-6">
+                            <span class="text-lg text-slate-200 font-normal">A consultoria é online ou
+                                presencial?</span>
+                            <svg :class="{'rotate-180': open}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="#64ffda" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="transition-transform duration-300">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div x-show="open" x-cloak x-transition class="p-6 pt-0">
+                            <p class="text-slate-300 font-light">Oferecemos um modelo de consultoria híbrida.
+                                Participamos de forma remota para otimizar o processo e, quando necessário, realizamos
+                                reuniões presenciais para garantir a proximidade e o alinhamento com o cliente.</p>
+                        </div>
+                    </div>
+                    <div x-data="{ open: false }" class="bg-[#0A192F] rounded-lg shadow-lg">
+                        <button @click="open = !open" class="w-full flex justify-between items-center text-left p-6">
+                            <span class="text-lg text-slate-200 font-normal">Qual é o tempo de início da
+                                consultoria?</span>
+                            <svg :class="{'rotate-180': open}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="#64ffda" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="transition-transform duration-300">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div x-show="open" x-cloak x-transition class="p-6 pt-0">
+                            <p class="text-slate-300 font-light">O tempo varia conforme o plano de ação e o objetivo do
+                                cliente. Nosso foco é a entrega de resultados sustentáveis, e não a duração do projeto.
+                                Garantimos acompanhamento contínuo para sua tranquilidade.</p>
+                        </div>
+                    </div>
+                    <div x-data="{ open: false }" class="bg-[#0A192F] rounded-lg shadow-lg">
+                        <button @click="open = !open" class="w-full flex justify-between items-center text-left p-6">
+                            <span class="text-lg text-slate-200 font-normal">Você oferece garantia de resultados?</span>
+                            <svg :class="{'rotate-180': open}" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none" stroke="#64ffda" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="transition-transform duration-300">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                        <div x-show="open" x-cloak x-transition class="p-6 pt-0">
+                            <p class="text-slate-300 font-light">Nossos resultados são baseados em análise e
+                                planejamento estratégico. Oferecemos um compromisso de parceria e um método comprovado
+                                para guiar a direção aos seus objetivos. O sucesso financeiro é uma jornada de
+                                colaboração mútua.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 7: Conecte-se -->
+        <section class="bg-[#081428] py-20 px-8 md:px-16" id="instagram">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="flex justify-center fade-in-element delay-200">
+                        <img src="image/Apresentação TZ Consultoria.mobile.png"
+                            alt="Feed do Instagram da TZ Consultoria em um smartphone"
+                            class="max-w-sm w-full transform -rotate-6">
+                    </div>
+                    <div class="text-center lg:text-left fade-in-element delay-400">
+                        <h3 class="text-3xl md:text-3xl text-slate-200 font-light fade-in-element">Conecte-se com a TZ
+                            Consultoria</h3>
+                        <p class="text-l md:text-l text-slate-200 font-light leading-snug mb-8">
+                            Conteúdo exclusivo sobre finanças, estratégias e dicas de negócios.
+                        </p>
+                        <a href="https://www.instagram.com/tzconsultoria_credito/" target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center justify-center bg-[#64ffda] text-[#0A192F] font-normal w-12 h-12 rounded-full shadow-lg shadow-[#64ffda]/30 hover:shadow-[#64ffda]/70 hover:scale-110 transition-all duration-300 relative overflow-hidden group">
+
+                            <!-- Ícone -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="lucide lucide-instagram transition-transform duration-300 group-hover:scale-110">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                            </svg>
+
+                            <!-- Efeito Glow -->
+                            <span
+                                class="absolute inset-0 rounded-full bg-[#64ffda] opacity-0 group-hover:opacity-20 blur-xl transition duration-500"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-[#081428] py-16 px-8 md:px-16">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-10">
+                <div class="md:col-span-2 lg:col-span-1">
+                    <h3 class="text-xl font-bold text-slate-200 mb-4">TZ Consultoria</h3>
+                    <p class="text-sm">Transformando complexidade em clareza e incerteza em resultados reais.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-slate-200 mb-4">Navegação</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#hero" class="hover:text-[#64ffda] transition-colors">Início</a></li>
+                        <li><a href="#sobre" class="hover:text-[#64ffda] transition-colors">Sobre</a></li>
+                        <li><a href="#servicos" class="hover:text-[#64ffda] transition-colors">Serviços</a></li>
+                        <li><a href="#diferenciais" class="hover:text-[#64ffda] transition-colors">Diferenciais</a></li>
+                        <li><a href="#parceiros" class="hover:text-[#64ffda] transition-colors">Parceiros</a></li>
+                        <li><a href="#faq" class="hover:text-[#64ffda] transition-colors">FAQ</a></li>
+                        <li><a href="#redes" class="hover:text-[#64ffda] transition-colors">Redes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-slate-200 mb-4">Fale Conosco</h4>
+                    <address class="not-italic text-sm space-y-2">
+                        <p>E-mail: contato@tzconsultoria.com</p>
+                        <p>
+                            AV. Trancredo Neves, 1632, Edf.Salvador Trade Center, Sala 1607 torre norte,
+                            Caminho das Arvores, Salvador-BA, CEP: 41.820-020.
+                        </p>
+
+                    </address>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-slate-200 mb-4">Siga-nos</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/tzconsultoria_credito/" target="_blank"
+                            rel="noopener noreferrer" class="hover:text-[#64ffda] transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-slate-700 pt-8 mt-8 text-center text-sm">
+                <p>© 2025 TZ Consultoria. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

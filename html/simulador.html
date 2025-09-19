@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Empréstimo - TZ Consultoria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #d1d5db;
+            border-radius: 5px;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+        }
+        input[type=range]:hover {
+            opacity: 1;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #0A192F;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        input[type=range]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #0A192F;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+    </style>
+</head>
+<body class="bg-[#0A192F] text-slate-800">
+
+    <header class="bg-[#0A192F] text-slate-400">
+        <nav x-data="{ open: false }" class="container mx-auto px-4 sm:px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-xl font-bold text-slate-200">TZ Consultoria</a>
+                
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html#hero" class="hover:text-[#64ffda] transition-colors">Início</a>
+                    <a href="index.html#sobre" class="hover:text-[#64ffda] transition-colors">Sobre</a>
+                    <a href="index.html#servicos" class="hover:text-[#64ffda] transition-colors">Serviços</a>
+                    <a href="index.html#diferenciais" class="hover:text-[#64ffda] transition-colors">Diferenciais</a>
+                    <a href="index.html#parceiros" class="hover:text-[#64ffda] transition-colors">Parceiros</a>
+                    <a href="index.html#faq" class="hover:text-[#64ffda] transition-colors">FAQ</a>
+                    <a href="index.html#redes" class="hover:text-[#64ffda] transition-colors">Redes</a>
+                </div>
+
+                <button @click="open = !open" class="md:hidden text-slate-200 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="md:hidden mt-4 space-y-2 bg-[#112240] p-4 rounded-md shadow-lg">
+                <a href="index.html#hero" class="block py-2 text-slate-200 hover:text-[#64ffda]">Início</a>
+                <a href="index.html#sobre" class="block py-2 text-slate-200 hover:text-[#64ffda]">Sobre</a>
+                <a href="index.html#servicos" class="block py-2 text-slate-200 hover:text-[#64ffda]">Serviços</a>
+                <a href="index.html#diferenciais" class="block py-2 text-slate-200 hover:text-[#64ffda]">Diferencias</a>
+                <a href="index.html#parceiros" class="block py-2 text-slate-200 hover:text-[#64ffda]">Parceiros</a>
+                <a href="index.html#faq" class="block py-2 text-slate-200 hover:text-[#64ffda]">FAQ</a>
+                <a href="index.html#redes" class="block py-2 text-slate-200 hover:text-[#64ffda]">Redes</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="min-h-screen flex flex-col lg:flex-row">
+        <div class="w-full lg:w-1/2 min-h-[50vh] lg:min-h-screen bg-cover bg-center p-8 md:p-16 flex flex-col justify-center text-white relative" style="background-image: url('https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <div class="absolute inset-0 bg-[#0A192F] opacity-70"></div>
+            <div class="relative z-10">
+                <p class="text-sm font-light tracking-widest text-[#64ffda] uppercase mb-4">CRÉDITO PJ</p>
+                <h1 class="text-4xl md:text-5xl font-light leading-tight tracking-tight mb-6">Empréstimo empresarial</h1>
+                <p class="md:text-lg max-w-lg font-light">Rápido, Seguro e 100% Online. Capital de giro com juros baixos e sem burocracia.</p>
+            </div>
+        </div>
+
+        <div class="w-full lg:w-1/2 bg-white p-8 md:p-12 flex flex-col justify-center">
+            <div class="w-full max-w-lg mx-auto">
+                <form id="simulationForm">
+                    <div class="mb-8">
+                        <div class="flex justify-between items-center mb-2">
+                            <label for="loanAmount" class="text-lg font-medium text-slate-600">Quanto você precisa?</label>
+                            <span id="loanAmountValue" class="text-3xl font-bold text-[#0A192F]">R$ 50.000</span>
+                        </div>
+                        <input type="range" id="loanAmount" name="loanAmount" min="50000" max="15000000" step="1000" value="50000" class="w-full">
+                        <div class="flex justify-between text-sm text-slate-500 mt-1">
+                            <span>R$ 50.000</span>
+                            <span>R$ 15.000.0000</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-[#0A192F] text-white font-bold py-4 px-8 rounded-md hover:bg-[#1a2d4a] transition-all duration-300">
+                        Solicitar Análise de Crédito
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const simulationForm = document.getElementById('simulationForm');
+            const loanAmountSlider = document.getElementById('loanAmount');
+            const loanAmountValue = document.getElementById('loanAmountValue');
+
+            const formatCurrency = (value) => {
+                return parseInt(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            };
+
+            loanAmountValue.textContent = formatCurrency(loanAmountSlider.value);
+
+            loanAmountSlider.addEventListener('input', () => {
+                const formattedValue = formatCurrency(loanAmountSlider.value);
+                loanAmountValue.textContent = formattedValue;
+            });
+
+            simulationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const loanAmount = loanAmountSlider.value;
+                window.location.href = `simulador-form-contato.html?valor=${loanAmount}`;
+            });
+        });
+    </script>
+
+</body>
+</html>
