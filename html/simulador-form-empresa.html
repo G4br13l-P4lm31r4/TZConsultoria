@@ -20,7 +20,8 @@
             height: 50px;
             border-radius: 50%;
             background: radial-gradient(closest-side, white 79%, transparent 80%),
-                        conic-gradient(#0A192F 66%, #E5E7EB 0);
+                        /* 66% para indicar o passo 2 de 3 */
+                        conic-gradient(#0A192F 66%, #E5E7EB 0); 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -34,24 +35,30 @@
 
     <main class="min-h-screen flex items-center justify-center p-4 sm:p-8">
         <div class="bg-white shadow-xl rounded-xl w-full max-w-2xl mx-auto p-6 sm:p-10">
-            <div class="flex justify-between items-center mb-8">
-                <h1 class="text-2xl sm:text-3xl font-light text-slate-800">Dados da Empresa</h1>
-                <div class="progress-circle">2 de 3</div>
+            
+            <div class="flex items-center mb-8">
+                <div class="progress-circle mr-4 flex-shrink-0">
+                    <span>2/3</span>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-slate-500">Passo 2 de 3</p>
+                    <h1 class="text-2xl sm:text-3xl font-light text-slate-800">Dados da Empresa</h1>
+                </div>
             </div>
 
-            <form id="companyForm" class="space-y-6">
+            <form id="companyForm" class="space-y-6" novalidate>
                 <div>
                     <label for="companyName" class="block text-sm font-medium text-slate-600 mb-1">Empresa</label>
-                    <input type="text" id="companyName" name="Empresa" placeholder="ARCOS DOURADOS COMERCIO DE ALIMENTOS SA" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                    <input type="text" id="companyName" name="Empresa" placeholder="Razão Social completa" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
                 </div>
                 <div>
                     <label for="cnpj" class="block text-sm font-medium text-slate-600 mb-1">CNPJ</label>
-                    <input type="text" id="cnpj" name="CNPJ" placeholder="Digite o CNPJ" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                    <input type="text" id="cnpj" name="CNPJ" placeholder="00.000.000/0000-00" class="w-full border border-slate-300 rounded-md p-3 bg-slate-100 cursor-not-allowed" readonly>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label for="cep" class="block text-sm font-medium text-slate-600 mb-1">CEP</label>
-                        <input type="text" id="cep" name="CEP" placeholder="06454070" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                        <input type="text" id="cep" name="CEP" placeholder="00000-000" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
                     </div>
                     <div>
                         <label for="uf" class="block text-sm font-medium text-slate-600 mb-1">UF</label>
@@ -60,16 +67,16 @@
                 </div>
                 <div>
                     <label for="city" class="block text-sm font-medium text-slate-600 mb-1">Cidade</label>
-                    <input type="text" id="city" name="Cidade" placeholder="BARUERI" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                    <input type="text" id="city" name="Cidade" placeholder="Nome da cidade" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
                 </div>
                 <div>
                     <label for="address" class="block text-sm font-medium text-slate-600 mb-1">Endereço</label>
-                    <input type="text" id="address" name="Endereço" placeholder="AL AMAZONAS" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                    <input type="text" id="address" name="Endereço" placeholder="Rua, avenida, etc." class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label for="number" class="block text-sm font-medium text-slate-600 mb-1">Número</label>
-                        <input type="text" id="number" name="Número" placeholder="253" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                        <input type="text" id="number" name="Número" placeholder="123" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
                     </div>
                     <div>
                         <label for="complement" class="block text-sm font-medium text-slate-600 mb-1">Complemento</label>
@@ -83,6 +90,8 @@
             </form>
         </div>
     </main>
+    
+    <script src="https://unpkg.com/imask"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -91,22 +100,49 @@
             const fullName = urlParams.get('nome');
             const email = urlParams.get('email');
             const phone = urlParams.get('telefone');
+            const cnpjValue = urlParams.get('cnpj'); // Pega o CNPJ da URL
             const consent = urlParams.get('consentimento');
 
+            // --- Seleção dos campos do formulário ---
             const companyForm = document.getElementById('companyForm');
+            const cnpjInput = document.getElementById('cnpj');
+            const cepInput = document.getElementById('cep');
+            const ufInput = document.getElementById('uf');
+            
+            // --- Preenchimento automático do CNPJ ---
+            const cnpjMaskDisplay = IMask(cnpjInput, { mask: '00.000.000/0000-00' });
+            if (cnpjValue) {
+                cnpjMaskDisplay.value = cnpjValue; // Aplica o valor com a máscara
+            }
+
+            // --- Máscaras para os outros campos ---
+            const cepMask = IMask(cepInput, { mask: '00000-000' });
+            const ufMask = IMask(ufInput, {
+                mask: 'aa',
+                prepare: str => str.toUpperCase() // Converte para maiúsculas automaticamente
+            });
+
             companyForm.addEventListener('submit', (e) => {
                 e.preventDefault();
+
+                // --- Validações ---
+                if (cepMask.unmaskedValue.length !== 8) {
+                    alert('Por favor, preencha o CEP completo.');
+                    return;
+                }
+                if (ufMask.unmaskedValue.length !== 2) {
+                    alert('Por favor, preencha a UF com 2 letras.');
+                    return;
+                }
+
                 const companyName = document.getElementById('companyName').value;
-                const cnpj = document.getElementById('cnpj').value;
-                const cep = document.getElementById('cep').value;
-                const uf = document.getElementById('uf').value;
                 const city = document.getElementById('city').value;
                 const address = document.getElementById('address').value;
                 const number = document.getElementById('number').value;
                 const complement = document.getElementById('complement').value;
 
-                // Redireciona para o passo 3, passando todos os dados coletados até agora
-                const nextUrl = `simulador-form-analise.html?valor=${loanAmount}&nome=${fullName}&email=${email}&telefone=${phone}&consentimento=${consent}&empresa=${encodeURIComponent(companyName)}&cnpj=${encodeURIComponent(cnpj)}&cep=${encodeURIComponent(cep)}&uf=${encodeURIComponent(uf)}&cidade=${encodeURIComponent(city)}&endereco=${encodeURIComponent(address)}&numero=${encodeURIComponent(number)}&complemento=${encodeURIComponent(complement)}`;
+                // Redireciona para o passo 3, passando todos os dados coletados
+                const nextUrl = `simulador-form-analise.html?valor=${loanAmount}&nome=${encodeURIComponent(fullName)}&email=${encodeURIComponent(email)}&telefone=${phone}&consentimento=${consent}&empresa=${encodeURIComponent(companyName)}&cnpj=${cnpjValue}&cep=${encodeURIComponent(cepMask.unmaskedValue)}&uf=${encodeURIComponent(ufMask.unmaskedValue)}&cidade=${encodeURIComponent(city)}&endereco=${encodeURIComponent(address)}&numero=${encodeURIComponent(number)}&complemento=${encodeURIComponent(complement)}`;
                 window.location.href = nextUrl;
             });
         });

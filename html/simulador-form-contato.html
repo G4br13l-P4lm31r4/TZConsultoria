@@ -34,9 +34,15 @@
 
     <main class="min-h-screen flex items-center justify-center p-4 sm:p-8">
         <div class="bg-white shadow-xl rounded-xl w-full max-w-2xl mx-auto p-6 sm:p-10">
-            <div class="flex justify-between items-center mb-8">
-                <h1 class="text-2xl sm:text-3xl font-light text-slate-800">Suas informações</h1>
-                <div class="progress-circle">1 de 3</div>
+            
+            <div class="flex items-center mb-8">
+                <div class="progress-circle mr-4 flex-shrink-0">
+                    <span>1/3</span>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-slate-500">Passo 1 de 3</p>
+                    <h1 class="text-2xl sm:text-3xl font-light text-slate-800">Suas informações</h1>
+                </div>
             </div>
 
             <div class="mb-8">
@@ -44,7 +50,7 @@
                 <p id="loanAmountDisplay" class="text-4xl font-bold text-[#0A192F]"></p>
             </div>
 
-            <form id="contactForm" class="space-y-6">
+            <form id="contactForm" class="space-y-6" novalidate>
                 <div>
                     <label for="fullName" class="block text-sm font-medium text-slate-600 mb-1">Nome completo</label>
                     <input type="text" id="fullName" name="Nome" placeholder="Digite seu nome" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
@@ -53,25 +59,37 @@
                     <label for="email" class="block text-sm font-medium text-slate-600 mb-1">E-mail</label>
                     <input type="email" id="email" name="E-mail" placeholder="Digite seu e-mail" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
                 </div>
+                
                 <div>
                     <label for="phone" class="block text-sm font-medium text-slate-600 mb-1">Celular</label>
-                    <input type="tel" id="phone" name="Telefone" placeholder="+55 (11) 9123-4567" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 17" class="h-5 w-7 mr-2"><rect width="24" height="17" fill="#009739"/><path fill="#fedd00" d="M12 2.5l9 6-9 6-9-6z"/><circle cx="12" cy="8.5" r="3.5" fill="#012169"/></svg>
+                            <span class="text-slate-500">+55</span>
+                        </div>
+                        <input type="tel" id="phone" name="Telefone" placeholder="(11) 91234-5678" class="w-full border border-slate-300 rounded-md p-3 pl-24 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                    </div>
                     <p class="text-xs text-slate-400 mt-1">Utilizamos o WhatsApp como uma das nossas formas de contato com você.</p>
                 </div>
+                
                 <div>
                     <label for="cnpj" class="block text-sm font-medium text-slate-600 mb-1">CNPJ</label>
-                    <input type="text" id="cnpj" name="CNPJ" placeholder="Digite o CNPJ" class="w-full border border-red-500 rounded-md p-3 focus:ring-red-500 focus:border-red-500 transition-colors" required>
+                    <input type="text" id="cnpj" name="CNPJ" placeholder="00.000.000/0000-00" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
                 </div>
+                
                 <div class="flex items-start">
-                    <input type="checkbox" id="consent" name="Consentimento" class="mt-1" required>
-                    <label for="consent" class="text-sm text-slate-500 ml-2">Concordo que este site armazene minhas informações e que possam me contatar por e-mail, WhatsApp, SMS e telefone.</label>
+                    <input type="checkbox" id="consent" name="Consentimento" class="mt-1 h-4 w-4 rounded border-gray-300 text-[#0A192F] focus:ring-[#0A192F]" required>
+                    <label for="consent" class="text-sm text-slate-500 ml-3">Concordo que este site armazene minhas informações e que possam me contatar por e-mail, WhatsApp, SMS e telefone.</label>
                 </div>
+
                 <button type="submit" class="w-full bg-[#0A192F] text-white font-bold py-3 px-8 rounded-md hover:bg-[#1a2d4a] transition-all duration-300 mt-6">
                     Continuar
                 </button>
             </form>
         </div>
     </main>
+
+    <script src="https://unpkg.com/imask"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -87,16 +105,38 @@
             loanAmountDisplay.textContent = formatCurrency(loanAmount);
 
             const contactForm = document.getElementById('contactForm');
+            const phoneInput = document.getElementById('phone');
+            const cnpjInput = document.getElementById('cnpj');
+
+            const phoneMask = IMask(phoneInput, { mask: '(00) 00000-0000' });
+            const cnpjMask = IMask(cnpjInput, { mask: '00.000.000/0000-00' });
+
             contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
+                
+                // --- VALIDAÇÃO DE E-MAIL CORRIGIDA ---
+                const emailInput = document.getElementById('email');
+                const emailPattern = /^\S+@\S+\.\S+$/;
+                
+                if (!emailPattern.test(emailInput.value)) {
+                    alert('Por favor, digite um endereço de e-mail válido.');
+                    return;
+                }
+                // --- FIM DA VALIDAÇÃO ---
+                
+                if (phoneMask.unmaskedValue.length !== 11) {
+                    alert('Por favor, preencha o número de celular completo.');
+                    return;
+                }
+                if (cnpjMask.unmaskedValue.length !== 14) {
+                    alert('Por favor, preencha o CNPJ completo.');
+                    return;
+                }
+
                 const fullName = document.getElementById('fullName').value;
-                const email = document.getElementById('email').value;
-                const phone = document.getElementById('phone').value;
-                const cnpj = document.getElementById('cnpj').value;
                 const consent = document.getElementById('consent').checked;
                 
-                // Redireciona para o próximo passo, passando todos os dados na URL
-                const nextUrl = `simulador-form-empresa.html?valor=${loanAmount}&nome=${encodeURIComponent(fullName)}&email=${encodeURIComponent(email)}&telefone=${encodeURIComponent(phone)}&cnpj=${encodeURIComponent(cnpj)}&consentimento=${consent}`;
+                const nextUrl = `simulador-form-empresa.html?valor=${loanAmount}&nome=${encodeURIComponent(fullName)}&email=${encodeURIComponent(emailInput.value)}&telefone=${encodeURIComponent(phoneMask.unmaskedValue)}&cnpj=${encodeURIComponent(cnpjMask.unmaskedValue)}&consentimento=${consent}`;
                 window.location.href = nextUrl;
             });
         });

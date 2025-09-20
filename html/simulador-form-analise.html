@@ -6,7 +6,7 @@
     <title>Análise de Crédito - TZ Consultoria</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -20,6 +20,7 @@
             height: 50px;
             border-radius: 50%;
             background: radial-gradient(closest-side, white 79%, transparent 80%),
+                        /* 100% para indicar o passo final */
                         conic-gradient(#0A192F 100%, #E5E7EB 0);
             display: flex;
             align-items: center;
@@ -34,12 +35,18 @@
 
     <main class="min-h-screen flex items-center justify-center p-4 sm:p-8">
         <div class="bg-white shadow-xl rounded-xl w-full max-w-2xl mx-auto p-6 sm:p-10">
-            <div class="flex justify-between items-center mb-8">
-                <h1 class="text-2xl sm:text-3xl font-light text-slate-800">Informações para análise de crédito</h1>
-                <div class="progress-circle">3 de 3</div>
+            
+            <div class="flex items-center mb-8">
+                <div class="progress-circle mr-4 flex-shrink-0">
+                    <span>3/3</span>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-slate-500">Passo 3 de 3</p>
+                    <h1 class="text-2xl sm:text-3xl font-light text-slate-800">Informações para análise</h1>
+                </div>
             </div>
 
-            <form id="analysisForm" action="https://formspree.io/f/mgvlgwdk" method="POST" class="space-y-6">
+            <form id="analysisForm" action="https://formspree.io/f/mgvlgwdk" method="POST" class="space-y-6" novalidate>
                 <input type="hidden" id="loanAmountHidden" name="Valor do Empréstimo">
                 <input type="hidden" id="fullNameHidden" name="Nome Completo">
                 <input type="hidden" id="emailHidden" name="E-mail">
@@ -56,16 +63,16 @@
 
                 <div>
                     <label for="cpf" class="block text-sm font-medium text-slate-600 mb-1">CPF</label>
-                    <input type="text" id="cpf" name="CPF" placeholder="XXX.XXX.XXX-XX" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                    <input type="text" id="cpf" name="CPF" placeholder="000.000.000-00" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
                 </div>
                 <div>
                     <label for="monthlyRevenue" class="block text-sm font-medium text-slate-600 mb-1">Faturamento mensal</label>
-                    <input type="text" id="monthlyRevenue" name="Faturamento mensal" placeholder="Mínimo de R$ 400.000,00 por mês" class="w-full border border-red-500 rounded-md p-3 focus:ring-red-500 focus:border-red-500 transition-colors" required>
-                    <p class="text-red-500 text-sm mt-1">Mínimo de R$ 400.000,00 por mês. O faturamento precisa ser comprovado por extrato PJ.</p>
+                    <input type="text" id="monthlyRevenue" name="Faturamento mensal" placeholder="R$ 400.000,00" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                    <p class="text-xs text-slate-500 mt-1">Mínimo de R$ 400.000,00 por mês. O faturamento precisa ser comprovado por extrato PJ.</p>
                 </div>
                 <div>
                     <label for="loanPurpose" class="block text-sm font-medium text-slate-600 mb-1">Qual a finalidade do crédito?</label>
-                    <select id="loanPurpose" name="Finalidade do crédito" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors text-slate-500" required>
+                    <select id="loanPurpose" name="Finalidade do crédito" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#0A192F] focus:border-[#0A192F] transition-colors text-slate-500" required>
                         <option value="">Selecione uma opção</option>
                         <option value="Capital de Giro">Capital de Giro</option>
                         <option value="Aquisição de Máquinas/Equipamentos">Aquisição de Máquinas/Equipamentos</option>
@@ -77,63 +84,85 @@
                 <div>
                     <h3 class="block text-sm font-medium text-slate-600 mb-2">Possui algum tipo de garantia para cadastrar na operação? (opcional)</h3>
                     <div class="grid grid-cols-2 gap-4">
-                        <label class="flex items-center">
-                            <input type="checkbox" name="Garantias[]" value="Nao possuo" class="mr-2"> Não possuo
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="Garantias[]" value="Veiculo(s)" class="mr-2"> Veículo(s)
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="Garantias[]" value="Imovel(is)" class="mr-2"> Imóvel(is)
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="Garantias[]" value="Cartao de Credito" class="mr-2"> Cartão de Crédito
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="Garantias[]" value="Boletos/Duplicatas" class="mr-2"> Boletos/Duplicatas
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="Garantias[]" value="Investimento" class="mr-2"> Investimento
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="Garantias[]" value="Maquinas e equipamentos" class="mr-2"> Máquinas e equipamentos
-                        </label>
+                        <label class="flex items-center text-sm text-slate-600"><input type="checkbox" name="Garantias[]" value="Nao possuo" class="mr-2 h-4 w-4 rounded border-gray-300 text-[#0A192F] focus:ring-[#0A192F]"> Não possuo</label>
+                        <label class="flex items-center text-sm text-slate-600"><input type="checkbox" name="Garantias[]" value="Veiculo(s)" class="mr-2 h-4 w-4 rounded border-gray-300 text-[#0A192F] focus:ring-[#0A192F]"> Veículo(s)</label>
+                        <label class="flex items-center text-sm text-slate-600"><input type="checkbox" name="Garantias[]" value="Imovel(is)" class="mr-2 h-4 w-4 rounded border-gray-300 text-[#0A192F] focus:ring-[#0A192F]"> Imóvel(is)</label>
+                        <label class="flex items-center text-sm text-slate-600"><input type="checkbox" name="Garantias[]" value="Cartao de Credito" class="mr-2 h-4 w-4 rounded border-gray-300 text-[#0A192F] focus:ring-[#0A192F]"> Cartão de Crédito</label>
+                        <label class="flex items-center text-sm text-slate-600"><input type="checkbox" name="Garantias[]" value="Boletos/Duplicatas" class="mr-2 h-4 w-4 rounded border-gray-300 text-[#0A192F] focus:ring-[#0A192F]"> Boletos/Duplicatas</label>
+                        <label class="flex items-center text-sm text-slate-600"><input type="checkbox" name="Garantias[]" value="Investimento" class="mr-2 h-4 w-4 rounded border-gray-300 text-[#0A192F] focus:ring-[#0A192F]"> Investimento</label>
+                        <label class="flex items-center text-sm text-slate-600"><input type="checkbox" name="Garantias[]" value="Maquinas e equipamentos" class="mr-2 h-4 w-4 rounded border-gray-300 text-[#0A192F] focus:ring-[#0A192F]"> Máquinas e equipamentos</label>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-[#64ffda] text-[#0A192F] font-bold py-3 px-8 rounded-md hover:bg-opacity-90 transition-all duration-300 mt-6">
+                <button type="submit" class="w-full bg-[#0A192F] text-white font-bold py-3 px-8 rounded-md hover:bg-opacity-90 transition-all duration-300 mt-6">
                     Enviar Solicitação
                 </button>
-                <p id="formMessage" class="mt-4 text-green-600 text-center hidden"></p>
+                <p id="formMessage" class="mt-4 text-center hidden"></p>
             </form>
         </div>
     </main>
+
+    <script src="https://unpkg.com/imask"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             
-            // Pega os dados dos passos anteriores da URL
-            document.getElementById('loanAmountHidden').value = urlParams.get('valor');
-            document.getElementById('fullNameHidden').value = decodeURIComponent(urlParams.get('nome'));
-            document.getElementById('emailHidden').value = decodeURIComponent(urlParams.get('email'));
-            document.getElementById('phoneHidden').value = decodeURIComponent(urlParams.get('telefone'));
+            // Pega todos os dados dos passos anteriores e preenche os campos ocultos
+            document.getElementById('loanAmountHidden').value = parseInt(urlParams.get('valor') || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            document.getElementById('fullNameHidden').value = urlParams.get('nome');
+            document.getElementById('emailHidden').value = urlParams.get('email');
+            document.getElementById('phoneHidden').value = urlParams.get('telefone');
             document.getElementById('consentHidden').value = urlParams.get('consentimento');
-            document.getElementById('companyNameHidden').value = decodeURIComponent(urlParams.get('empresa'));
-            document.getElementById('cnpjHidden').value = decodeURIComponent(urlParams.get('cnpj'));
-            document.getElementById('cepHidden').value = decodeURIComponent(urlParams.get('cep'));
-            document.getElementById('ufHidden').value = decodeURIComponent(urlParams.get('uf'));
-            document.getElementById('cityHidden').value = decodeURIComponent(urlParams.get('cidade'));
-            document.getElementById('addressHidden').value = decodeURIComponent(urlParams.get('endereco'));
-            document.getElementById('numberHidden').value = decodeURIComponent(urlParams.get('numero'));
-            document.getElementById('complementHidden').value = decodeURIComponent(urlParams.get('complemento'));
+            document.getElementById('companyNameHidden').value = urlParams.get('empresa');
+            document.getElementById('cnpjHidden').value = urlParams.get('cnpj');
+            document.getElementById('cepHidden').value = urlParams.get('cep');
+            document.getElementById('ufHidden').value = urlParams.get('uf');
+            document.getElementById('cityHidden').value = urlParams.get('cidade');
+            document.getElementById('addressHidden').value = urlParams.get('endereco');
+            document.getElementById('numberHidden').value = urlParams.get('numero');
+            document.getElementById('complementHidden').value = urlParams.get('complemento');
 
             const analysisForm = document.getElementById('analysisForm');
             const formMessage = document.getElementById('formMessage');
+            const cpfInput = document.getElementById('cpf');
+            const monthlyRevenueInput = document.getElementById('monthlyRevenue');
+            const loanPurposeInput = document.getElementById('loanPurpose');
+            
+            // --- Máscaras ---
+            const cpfMask = IMask(cpfInput, { mask: '000.000.000-00' });
+            const revenueMask = IMask(monthlyRevenueInput, {
+                mask: 'R$ num',
+                blocks: {
+                    num: {
+                        mask: Number,
+                        scale: 2,
+                        thousandsSeparator: '.',
+                        padFractionalZeros: true,
+                        radix: ',',
+                        mapToRadix: ['.']
+                    }
+                }
+            });
 
             analysisForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                const formData = new FormData(analysisForm);
+
+                // --- Validações ---
+                if (cpfMask.unmaskedValue.length !== 11) {
+                    alert('Por favor, preencha o CPF completo.');
+                    return;
+                }
+                if (revenueMask.number < 400000) {
+                    alert('O faturamento mensal deve ser de no mínimo R$ 400.000,00.');
+                    return;
+                }
+                if (loanPurposeInput.value === "") {
+                    alert('Por favor, selecione a finalidade do crédito.');
+                    return;
+                }
+                
+                // Exibe mensagem de envio
                 formMessage.textContent = 'Enviando...';
                 formMessage.className = 'mt-4 text-yellow-600 text-center';
                 formMessage.classList.remove('hidden');
@@ -141,19 +170,15 @@
                 try {
                     const response = await fetch(analysisForm.action, {
                         method: 'POST',
-                        body: formData,
+                        body: new FormData(analysisForm),
                         headers: { 'Accept': 'application/json' }
                     });
                     
                     if (response.ok) {
                         window.location.href = 'simulador-confirmacao.html';
                     } else {
-                        const errorData = await response.json();
-                        if (errorData.errors) {
-                             formMessage.textContent = `Erro: ${errorData.errors[0].message}`;
-                        } else {
-                             formMessage.textContent = `Houve um erro no servidor (${response.status}). Por favor, tente novamente.`;
-                        }
+                        // Trata erros do Formspree
+                        formMessage.textContent = `Houve um erro no servidor. Por favor, tente novamente.`;
                         formMessage.className = 'mt-4 text-red-600 text-center';
                     }
                 } catch (error) {

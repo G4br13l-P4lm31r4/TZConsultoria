@@ -7,88 +7,86 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f0f2f5;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background-color: #f0f2f5; /* Fundo geral claro, se necessário */
         }
+
+        /* --- Estilo do Slider (Controle Deslizante) --- */
         input[type=range] {
             -webkit-appearance: none;
             width: 100%;
-            height: 8px;
-            background: #d1d5db;
+            height: 6px; /* Altura da barra */
+            background: #e5e7eb; /* Cor da barra de fundo (cinza claro) */
             border-radius: 5px;
             outline: none;
-            opacity: 0.7;
-            transition: opacity .2s;
+            padding: 0;
+            margin: 0;
         }
-        input[type=range]:hover {
-            opacity: 1;
+
+        /* --- Barra de progresso (a parte azul clara) --- */
+        input[type=range] {
+            /* O truque é usar um gradiente que muda de posição com JS */
+            background: linear-gradient(to right, #0063f7 0%, #0063f7 var(--progress-percent, 0%), #e5e7eb 0%, #e5e7eb 100%);
         }
+
+        /* --- Bolinha do Slider para Chrome/Safari --- */
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 20px;
-            height: 20px;
-            background: #0A192F;
+            width: 22px;
+            height: 22px;
+            background: #0063f7; /* Cor da bolinha: verde-água original */
             cursor: pointer;
             border-radius: 50%;
-            border: 2px solid white;
+            border: 3px solid white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            margin-top: -8px; /* Centraliza a bolinha na barra */
         }
+        
+        /* --- Bolinha do Slider para Firefox --- */
         input[type=range]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            background: #0A192F;
+            width: 22px;
+            height: 22px;
+            background: #0063f7; /* Cor da bolinha: verde-água original */
             cursor: pointer;
             border-radius: 50%;
-            border: 2px solid white;
+            border: 3px solid white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
     </style>
 </head>
+
 <body class="bg-[#0A192F] text-slate-800">
 
-    <header class="bg-[#0A192F] text-slate-400">
+    <header class="bg-white text-slate-400 fixed w-full top-0 z-50 shadow-sm">
         <nav x-data="{ open: false }" class="container mx-auto px-4 sm:px-6 py-4">
             <div class="flex items-center justify-between">
-                <a href="index.html" class="text-xl font-bold text-slate-200">TZ Consultoria</a>
-                
-                <div class="hidden md:flex space-x-6">
+                <a href="index.html">
+                    <img src="image/logosemfundo.png" alt="Logo da TZ Consultoria" class="h-10 w-auto">
+                </a>
+                <div class="hidden md:flex space-x-6 text-[#0A192F] font-medium">
                     <a href="index.html#hero" class="hover:text-[#64ffda] transition-colors">Início</a>
-                    <a href="index.html#sobre" class="hover:text-[#64ffda] transition-colors">Sobre</a>
-                    <a href="index.html#servicos" class="hover:text-[#64ffda] transition-colors">Serviços</a>
-                    <a href="index.html#diferenciais" class="hover:text-[#64ffda] transition-colors">Diferenciais</a>
-                    <a href="index.html#parceiros" class="hover:text-[#64ffda] transition-colors">Parceiros</a>
-                    <a href="index.html#faq" class="hover:text-[#64ffda] transition-colors">FAQ</a>
-                    <a href="index.html#redes" class="hover:text-[#64ffda] transition-colors">Redes</a>
                 </div>
-
-                <button @click="open = !open" class="md:hidden text-slate-200 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
+                <button @click="open = !open" class="md:hidden text-[#0A192F] focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
-
-            <div x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="md:hidden mt-4 space-y-2 bg-[#112240] p-4 rounded-md shadow-lg">
+            <div x-show="open" x-transition class="md:hidden mt-4 space-y-2 bg-[#112240] p-4 rounded-md shadow-lg">
                 <a href="index.html#hero" class="block py-2 text-slate-200 hover:text-[#64ffda]">Início</a>
-                <a href="index.html#sobre" class="block py-2 text-slate-200 hover:text-[#64ffda]">Sobre</a>
-                <a href="index.html#servicos" class="block py-2 text-slate-200 hover:text-[#64ffda]">Serviços</a>
-                <a href="index.html#diferenciais" class="block py-2 text-slate-200 hover:text-[#64ffda]">Diferencias</a>
-                <a href="index.html#parceiros" class="block py-2 text-slate-200 hover:text-[#64ffda]">Parceiros</a>
-                <a href="index.html#faq" class="block py-2 text-slate-200 hover:text-[#64ffda]">FAQ</a>
-                <a href="index.html#redes" class="block py-2 text-slate-200 hover:text-[#64ffda]">Redes</a>
             </div>
         </nav>
     </header>
 
-    <main class="min-h-screen flex flex-col lg:flex-row">
-        <div class="w-full lg:w-1/2 min-h-[50vh] lg:min-h-screen bg-cover bg-center p-8 md:p-16 flex flex-col justify-center text-white relative" style="background-image: url('https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
-            <div class="absolute inset-0 bg-[#0A192F] opacity-70"></div>
+    <main class="min-h-screen flex lg:flex-row pt-16"> <div class="w-full lg:w-1/2 min-h-[50vh] lg:min-h-screen bg-cover bg-center p-8 md:p-16 flex flex-col justify-center text-white relative"
+            style="background-image: url('https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <div class="absolute inset-0 bg-[#0A192F] opacity-70"></div> 
             <div class="relative z-10">
                 <p class="text-sm font-light tracking-widest text-[#64ffda] uppercase mb-4">CRÉDITO PJ</p>
                 <h1 class="text-4xl md:text-5xl font-light leading-tight tracking-tight mb-6">Empréstimo empresarial</h1>
@@ -96,24 +94,29 @@
             </div>
         </div>
 
-        <div class="w-full lg:w-1/2 bg-white p-8 md:p-12 flex flex-col justify-center">
-            <div class="w-full max-w-lg mx-auto">
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-8 relative bg-transparent z-20">
+            <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md mx-auto">
                 <form id="simulationForm">
-                    <div class="mb-8">
-                        <div class="flex justify-between items-center mb-2">
-                            <label for="loanAmount" class="text-lg font-medium text-slate-600">Quanto você precisa?</label>
-                            <span id="loanAmountValue" class="text-3xl font-bold text-[#0A192F]">R$ 50.000</span>
-                        </div>
-                        <input type="range" id="loanAmount" name="loanAmount" min="50000" max="15000000" step="1000" value="50000" class="w-full">
-                        <div class="flex justify-between text-sm text-slate-500 mt-1">
-                            <span>R$ 50.000</span>
-                            <span>R$ 15.000.0000</span>
-                        </div>
+                    <div class="mb-8 text-center">
+                        <label for="loanAmount" class="text-base font-medium text-slate-500">Valor do crédito</label>
+                        <span id="loanAmountValue" class="block text-4xl lg:text-5xl font-bold text-[#0A192F] mt-1">R$ 1.050.000</span>
                     </div>
 
-                    <button type="submit" class="w-full bg-[#0A192F] text-white font-bold py-4 px-8 rounded-md hover:bg-[#1a2d4a] transition-all duration-300">
-                        Solicitar Análise de Crédito
+                    <div class="mb-8">
+                        <input type="range" id="loanAmount" name="loanAmount" min="50000" max="15000000" step="10000" value="50000" class="w-full">
+                        <div class="flex justify-between text-xs text-slate-500 mt-2">
+                            <span>R$ 50 mil</span>
+                            <span>R$ 15 milhões</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-center text-sm text-slate-500 mb-6">Iniciar busca pela melhor proposta nas condições selecionadas</p>
+
+                    <button type="submit" class="w-full bg-[#0A192F] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#1a2d4a] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#64ffda] focus:ring-opacity-50">
+                        Buscar as melhores taxas
                     </button>
+
+                    <p class="text-center text-xs text-slate-400 mt-4">Todas as operações estão sujeitas a análise e aprovação de crédito.</p>
                 </form>
             </div>
         </div>
@@ -129,12 +132,23 @@
                 return parseInt(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0 });
             };
 
-            loanAmountValue.textContent = formatCurrency(loanAmountSlider.value);
+            const updateSliderProgress = (slider) => {
+                const min = parseInt(slider.min);
+                const max = parseInt(slider.max);
+                const value = parseInt(slider.value);
+                const percentage = ((value - min) / (max - min)) * 100;
+                slider.style.setProperty('--progress-percent', `${percentage}%`);
+            };
 
-            loanAmountSlider.addEventListener('input', () => {
-                const formattedValue = formatCurrency(loanAmountSlider.value);
-                loanAmountValue.textContent = formattedValue;
-            });
+            const updateSimulation = () => {
+                loanAmountValue.textContent = formatCurrency(loanAmountSlider.value);
+                updateSliderProgress(loanAmountSlider);
+            };
+
+            // Inicializa o slider e o valor
+            updateSimulation();
+
+            loanAmountSlider.addEventListener('input', updateSimulation);
 
             simulationForm.addEventListener('submit', (e) => {
                 e.preventDefault();
