@@ -15,6 +15,10 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #0A192F;
@@ -92,69 +96,86 @@
 
                 <!-- Logo -->
                 <a href="index.html" class="flex items-center space-x-2">
-                    <img src="image/logosemfundo.png" alt="Logo TZ Consultoria" class="h-14 w-auto">
+                    <img src="image/simboloTZ.png" alt="Logo TZ Consultoria" class="h-14 w-auto">
                 </a>
 
                 <!-- Menu Desktop -->
                 <nav class="hidden md:flex space-x-8 text-[#0A192F]">
-                    <a href="#hero" class="hover:text-[#64ffda] transition-colors">Início</a>
-                    <a href="#sobre" class="hover:text-[#64ffda] transition-colors">Sobre</a>
-                    <a href="#servicos" class="hover:text-[#64ffda] transition-colors">Serviços</a>
-                    <a href="#diferenciais" class="hover:text-[#64ffda] transition-colors">Diferenciais</a>
-                    <a href="#parceiros" class="hover:text-[#64ffda] transition-colors">Parceiros</a>
-                    <a href="#faq" class="hover:text-[#64ffda] transition-colors">FAQ</a>
-                    <a href="#instagram" class="hover:text-[#64ffda] transition-colors">Redes</a>
+                    <a href="#hero" class="hover:text-[#97e2c9] transition-colors">Início</a>
+                    <a href="#sobre" class="hover:text-[#97e2c9] transition-colors">Sobre</a>
+                    <a href="#servicos" class="hover:text-[#97e2c9] transition-colors">Serviços</a>
+                    <a href="#diferenciais" class="hover:text-[#97e2c9] transition-colors">Diferenciais</a>
+                    <a href="#parceiros" class="hover:text-[#97e2c9] transition-colors">Parceiros</a>
+                    <a href="#faq" class="hover:text-[#97e2c9] transition-colors">FAQ</a>
+                    <a href="#instagram" class="hover:text-[#97e2c9] transition-colors">Redes</a>
                 </nav>
 
                 <!-- Botão Mobile -->
                 <button id="menu-btn" class="md:hidden text-slate-200 focus:outline-none">
                     <!-- Ícone hambúrguer -->
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <svg style="color: #0A192F;" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
 
             <!-- Menu Mobile -->
-            <nav id="mobile-menu" class="hidden md:hidden bg-white px-6 pb-4 text-[#0A192F]">
-                <a href="#hero" class="block py-2 text-slate-200 hover:text-[#97e2c9]">Início</a>
-                <a href="#sobre" class="block py-2 text-slate-200 hover:text-[#97e2c9]">Sobre</a>
-                <a href="#servicos" class="block py-2 text-slate-200 hover:text-[#97e2c9]">Serviços</a>
-                <a href="#diferenciais" class="block py-2 text-slate-200 hover:text-[#97e2c9]">Diferenciais</a>
-                <a href="#parceiros" class="block py-2 text-slate-200 hover:text-[#97e2c9]">Parceiros</a>
-                <a href="#faq" class="block py-2 text-slate-200 hover:text-[#97e2c9]">faq</a>
-                <a href="#instagram" class="block py-2 text-slate-200 hover:text-[#97e2c9]">Redes</a>
+            <nav id="mobile-menu" style="color: #0A192F;" class="hidden md:hidden bg-white px-6 pb-4 text-[#0A192F]">
+                <a href="#hero" style="color: #0A192F;"
+                    class="block py-2 text-slate-200 hover:text-[#0A192F]">Início</a>
+                <a href="#sobre" style="color: #0A192F;"
+                    class="block py-2 text-slate-200 hover:text-[#0A192F]">Sobre</a>
+                <a href="#servicos" style="color: #0A192F;"
+                    class="block py-2 text-slate-200 hover:text-[#0A192F]">Serviços</a>
+                <a href="#diferenciais" style="color: #0A192F;"
+                    class="block py-2 text-slate-200 hover:text-[#0A192F]">Diferenciais</a>
+                <a href="#parceiros" style="color: #0A192F;"
+                    class="block py-2 text-slate-200 hover:text-[#0A192F]">Parceiros</a>
+                <a href="#faq" style="color: #0A192F;" class="block py-2 text-slate-200 hover:text-[#0A192F]">faq</a>
+                <a href="#instagram" style="color: #0A192F;"
+                    class="block py-2 text-slate-200 hover:text-[#0A192F]">Redes</a>
             </nav>
         </header>
 
         <script>
-            // Script simples para abrir/fechar menu mobile
+            // Seleciona os elementos do menu
             const menuBtn = document.getElementById("menu-btn");
             const mobileMenu = document.getElementById("mobile-menu");
+            // Seleciona TODOS os links dentro do menu mobile
+            const mobileMenuLinks = document.querySelectorAll("#mobile-menu a");
 
+            // Função para abrir/fechar o menu ao clicar no botão hambúrguer
             menuBtn.addEventListener("click", () => {
                 mobileMenu.classList.toggle("hidden");
+            });
+
+            // --- NOVO TRECHO ADICIONADO ---
+            // Adiciona um evento de clique para CADA link do menu
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener("click", () => {
+                    // Adiciona a classe 'hidden' para fechar o menu
+                    mobileMenu.classList.add("hidden");
+                });
             });
         </script>
 
         <!-- Seção 1: Hero -->
-        <section class="min-h-screen grid grid-cols-2" id="hero">
-            <!-- Coluna do texto -->
-            <div class="flex flex-col justify-center p-4 sm:p-8 md:p-16 bg-[#112240]">
-                <p
-                    class="text-xs sm:text-sm font-light tracking-widest text-[#97e2c9] uppercase mb-2 sm:mb-4 fade-in-element delay-200">
+        <section class="min-h-screen grid grid-cols-1 md:grid-cols-2" id="hero">
+
+            <div class="flex flex-col justify-center p-4 sm:p-8 md:p-16 bg-[#112240] order-last md:order-first">
+                <p class="text-xs sm:text-sm font-light tracking-widest text-[#97e2c9] uppercase mb-2 sm:mb-4">
                     Consultoria Financeira
                 </p>
                 <h1
-                    class="text-xl sm:text-3xl md:text-5xl text-slate-200 font-light leading-tight tracking-tight mb-4 sm:mb-6 fade-in-element delay-400">
+                    class="text-xl sm:text-3xl md:text-5xl text-slate-200 font-light leading-tight tracking-tight mb-4 sm:mb-6">
                     Seu Próximo Salto <span class="text-[#97e2c9] font-extralight">Financeiro</span> Começa Aqui.
                 </h1>
-                <p
-                    class="text-xs sm:text-base md:text-lg font-light mb-6 sm:mb-8 text-slate-300 fade-in-element delay-600">
+                <p class="text-xs sm:text-base md:text-lg font-light mb-6 sm:mb-8 text-slate-300">
                     A consultoria financeira que transforma a gestão de empresas e a vida de profissionais liberais.
                     Não é sobre planilhas, é sobre o seu futuro.
                 </p>
-                <div class="flex flex-wrap gap-3 sm:gap-4 fade-in-element delay-800">
+                <div class="flex flex-wrap gap-3 sm:gap-4">
                     <a href="simulador.html"
                         class="inline-block bg-transparent border border-[#97e2c9] text-[#97e2c9] font-normal py-2 px-4 sm:py-3 sm:px-8 rounded-md hover:bg-[#97e2c9]/10 transition-all duration-300">
                         Simular Empréstimo
@@ -162,11 +183,10 @@
                 </div>
             </div>
 
-            <!-- Coluna da imagem -->
-            <div class="h-full min-h-[200px] sm:min-h-[300px] md:min-h-screen image-gradient-overlay">
-                <img src="image/arranha-ceus-vista-cidade-moldura-da-janela-lider.jpg"
+            <div class="h-full min-h-[50vh] md:min-h-screen image-gradient-overlay">
+                <img src="image/Gemini_Generated_Image_5luxu35luxu35lux.png"
                     alt="Profissionais de finanças colaborando em um ambiente de trabalho moderno"
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-cover object-center"
                     onerror="this.onerror=null;this.src='https://placehold.co/1000/1200/0A192F/64ffda?text=Image+Not+Found';">
             </div>
         </section>
@@ -186,7 +206,7 @@
             <!-- Coluna de texto -->
             <div class="flex flex-col justify-center text-slate-800">
                 <h2 class="text-3xl md:text-4xl font-light text-[#0A192F] mb-6 leading-tight">
-                    Como funciona a <span class="text-[#97e2c9] font-light">TZ Consultoria?</span>
+                    Como funciona a <span class="text-[#00A651] font-extralight">TZ Consultoria?</span>
                 </h2>
                 <p class="text-slate-600 font-light text-base md:text-lg leading-relaxed mb-4">
                     Somos uma consultoria financeira focada em transformar a sua relação com o dinheiro,
@@ -270,7 +290,7 @@
             <div class="max-w-6xl mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-light text-[#0A192F] mb-6 leading-tight">
-                    Nossos Diferenciais
+                        Nossos Diferenciais
                     </h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -364,7 +384,7 @@
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-light text-[#0A192F] mb-6 leading-tight">
-                    Perguntas Frequentes
+                        Perguntas Frequentes
                     </h2>
                 </div>
                 <div class="space-y-4 fade-in-element delay-200">
@@ -456,7 +476,7 @@
             <div class="max-w-6xl mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div class="flex justify-center fade-in-element delay-200">
-                        <img src="image/Apresentação TZ Consultoria.mobile.png"
+                        <img src="image/Apresentação TZ Consultoria.mobile (2).png"
                             alt="Feed do Instagram da TZ Consultoria em um smartphone"
                             class="max-w-sm w-full transform -rotate-6">
                     </div>
@@ -496,7 +516,7 @@
         <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-10">
                 <div class="md:col-span-2 lg:col-span-1">
-                    <h3 class="text-xl font-bold text-slate-200 mb-4">TZ Consultoria</h3>
+                    <img src="image/logohorizontaltz.png" alt="logohorizontaltz">
                     <p class="text-sm">Transformando complexidade em clareza e incerteza em resultados reais.</p>
                 </div>
                 <div>
@@ -519,9 +539,11 @@
                             AV. Trancredo Neves, 1632, Edf.Salvador Trade Center, Sala 1607 torre norte,
                             Caminho das Arvores, Salvador-BA, CEP: 41.820-020.
                         </p>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3269.232169787865!2d-38.457703219145344!3d-12.985013658535433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7161b10049d63ef%3A0x5db7abe00761d876!2sSalvador%20Trade%20Center!5e0!3m2!1spt-BR!2sbr!4v1758328504476!5m2!1spt-BR!2sbr" 
-                        width="400" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3269.232169787865!2d-38.457703219145344!3d-12.985013658535433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7161b10049d63ef%3A0x5db7abe00761d876!2sSalvador%20Trade%20Center!5e0!3m2!1spt-BR!2sbr!4v1758328504476!5m2!1spt-BR!2sbr"
+                            width="400" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+
                     </address>
                 </div>
                 <div>
