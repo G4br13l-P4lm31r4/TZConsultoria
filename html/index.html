@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <!-- Alpine.js for interactivity -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -84,6 +85,290 @@
                     rgba(10, 25, 47, 0) 75%);
             z-index: 1;
             pointer-events: none;
+        }
+
+        /* Garante que o container do Swiper ocupe a largura correta */
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Alinha o conteúdo do slide no topo, caso tenham alturas diferentes */
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        /* Cor das setas de navegação */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #64ffda !important;
+            transition: transform 0.2s ease;
+        }
+
+        /* Efeito de escala ao passar o mouse sobre as setas */
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            transform: scale(1.2);
+        }
+
+        /* Cor da bolinha de paginação ativa */
+        .swiper-pagination-bullet-active {
+            background-color: #64ffda !important;
+        }
+
+        /* Cor das bolinhas inativas */
+        .swiper-pagination-bullet {
+            background-color: #A8B2D1;
+        }
+
+        /* Estilos para o novo carrossel de serviços */
+        .servicesSwiper {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .servicesSwiper .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 300px;
+            /* Largura dos slides laterais */
+            height: 400px;
+            /* Altura dos slides laterais */
+            transition: transform 0.5s ease;
+        }
+
+        .servicesSwiper .swiper-slide-active {
+            transform: scale(1.15);
+            /* Aumenta o slide central */
+            z-index: 10;
+        }
+
+        .card-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .group:hover .card-image {
+            transform: scale(1.10);
+        }
+
+        .card-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* ============================================== */
+        /* CSS FINAL BASEADO NO SITE MODELO */
+        /* ============================================== */
+        input[type=radio] {
+            display: none;
+        }
+
+        .container-modelo {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .cards {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            /* Largura do card central */
+            aspect-ratio: 3 / 4;
+            /* Proporção do card */
+            margin-bottom: 20px;
+            perspective: 800px;
+            /* Adiciona perspectiva para o efeito 3D */
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s ease;
+            cursor: pointer;
+            display: flex;
+            /* Para centralizar conteúdo */
+            align-items: flex-end;
+            /* Alinha na base */
+            justify-content: center;
+            text-align: center;
+            border-radius: 1rem;
+            /* rounded-xl */
+            overflow: hidden;
+        }
+
+        .card img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .card::after {
+            /* Overlay escuro */
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 50%);
+            z-index: 2;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 3;
+            color: white;
+            padding: 1.5rem;
+            width: 100%;
+        }
+
+        .button-wrapper {
+            display: none;
+            /* Oculto por padrão */
+            margin-top: 1rem;
+        }
+
+        .saiba-mais-btn {
+            display: inline-block;
+            background-color: white;
+            color: black;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            /* rounded-full */
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .saiba-mais-btn:hover {
+            background-color: #e2e8f0;
+            /* gray-200 */
+        }
+
+        /* A LÓGICA DO CARROSSEL COM CSS */
+        #item-1:checked~.cards #card-3,
+        #item-2:checked~.cards #card-1,
+        #item-3:checked~.cards #card-2 {
+            transform: translateX(-85%) scale(0.8);
+            z-index: 0;
+        }
+
+        #item-1:checked~.cards #card-2,
+        #item-2:checked~.cards #card-3,
+        #item-3:checked~.cards #card-1 {
+            transform: translateX(85%) scale(0.8);
+            z-index: 0;
+        }
+
+        #item-1:checked~.cards #card-1,
+        #item-2:checked~.cards #card-2,
+        #item-3:checked~.cards #card-3 {
+            transform: translateX(0) scale(1);
+            z-index: 1;
+        }
+
+        /* Mostra o botão apenas no card ativo */
+        #item-1:checked~.cards #card-1 .button-wrapper,
+        #item-2:checked~.cards #card-2 .button-wrapper,
+        #item-3:checked~.cards #card-3 .button-wrapper {
+            display: block;
+        }
+
+        /* BARRA DE PROGRESSO */
+        .progress-bar {
+            display: flex;
+            width: 100%;
+            max-width: 400px;
+            gap: 0.5rem;
+            /* gap-2 */
+            margin-top: 2.5rem;
+            /* mt-10 */
+        }
+
+        .step {
+            flex: 1;
+            height: 4px;
+            background-color: #4a5a76;
+            /* Cor inativa */
+            border-radius: 2px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .step.active {
+            background-color: #64ffda;
+            /* Sua cor ativa */
+        }
+
+        /* ============================================== */
+        /* CSS PARA O CARROSSEL DE PARCEIROS */
+        /* ============================================== */
+        .partnersSwiper {
+            width: 100%;
+            height: 100px;
+            /* Altura do container */
+        }
+
+        .partnersSwiper .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .partnersSwiper .swiper-slide img {
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
+            filter: grayscale(100%) contrast(0.8);
+            /* Tons de cinza e menos contraste */
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .partnersSwiper .swiper-slide img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .partners-pagination .swiper-pagination-bullet {
+            background-color: #A8B2D1;
+            /* Cor inativa */
+        }
+
+        .partners-pagination .swiper-pagination-bullet-active {
+            background-color: #64ffda !important;
+            /* Cor ativa */
         }
     </style>
 </head>
@@ -222,67 +507,51 @@
         </section>
 
         <!-- Seção 3: Nossos Serviços -->
-        <section class="bg-[#112240] py-20 px-8 md:px-16" id="servicos">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl text-slate-200 font-light fade-in-element">Soluções sob Medida para
-                        o seu Crescimento</h2>
-                    <p class="mt-4 md:text-lg text-slate-300 max-w-3xl mx-auto fade-in-element delay-200">
-                        Aqui você encontra a solução que realmente precisa para alavancar seus resultados.
-                    </p>
+        <section class="bg-[#112240] py-20 overflow-hidden" id="servicos">
+            <div class="container-modelo">
+                <h2 id="carouselTitle" class="text-3xl md:text-4xl text-slate-200 font-light mb-12 text-center">
+                </h2>
+
+                <input type="radio" name="slider" id="item-1" checked>
+                <input type="radio" name="slider" id="item-2">
+                <input type="radio" name="slider" id="item-3">
+
+                <div class="cards" id="carousel">
+                    <label class="card" for="item-1" id="card-1">
+                        <img src="image\6ff6bce7-d46e-4a42-8982-ce69d399f5c7.png" alt="Crédito Subsidiado">
+                        <div class="card-content">
+                            <h3 class="text-2xl font-semibold text-white mb-4">Crédito Subsidiado</h3>
+                            <div class="button-wrapper">
+                                <a href="#" class="saiba-mais-btn">Saiba Mais</a>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="card" for="item-2" id="card-2">
+                        <img src="image\29ca9694-dd1b-4cec-9e13-2ccf12248e92.png" alt="Diagnóstico Financeiro">
+                        <div class="card-content">
+                            <h3 class="text-2xl font-semibold text-white mb-4">Diagnóstico Financeiro</h3>
+                            <div class="button-wrapper">
+                                <a href="#" class="saiba-mais-btn">Saiba Mais</a>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="card" for="item-3" id="card-3">
+                        <img src="image\53c1ebec-b36d-46e7-8fa8-06fccbb66750.png" alt="Consultoria Estratégica">
+                        <div class="card-content">
+                            <h3 class="text-2xl font-semibold text-white mb-4">Consultoria Estratégica</h3>
+                            <div class="button-wrapper">
+                                <a href="#" class="saiba-mais-btn">Saiba Mais</a>
+                            </div>
+                        </div>
+                    </label>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    <div
-                        class="text-center p-8 bg-[#0A192F] rounded-lg shadow-lg fade-in-element delay-400 transition-all duration-300 transform hover:-translate-y-2 hover:bg-[#1a2d4a]">
-                        <div class="flex justify-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
-                                fill="none" stroke="#97e2c9" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <line x1="12" x2="12" y1="2" y2="22" />
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-normal text-slate-200 mb-3">Crédito Subsidiado</h3>
-                        <p class="text-slate-300 font-light mb-6">
-                            Acessamos linhas de crédito com condições diferenciadas e taxas competitivas para seus
-                            projetos.
-                        </p>
-                    </div>
-                    <div
-                        class="text-center p-8 bg-[#0A192F] rounded-lg shadow-lg fade-in-element delay-600 transition-all duration-300 transform hover:-translate-y-2 hover:bg-[#1a2d4a]">
-                        <div class="flex justify-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
-                                fill="none" stroke="#97e2c9" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <circle cx="11" cy="11" r="8" />
-                                <line x1="21" x2="16.65" y1="21" y2="16.65" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-normal text-slate-200 mb-3">Diagnóstico Financeiro</h3>
-                        <p class="text-slate-300 font-light mb-6">
-                            Análise aprofundada para identificar gargalos, otimizar recursos e basear decisões em dados
-                            concretos.
-                        </p>
 
-                    </div>
-                    <div
-                        class="text-center p-8 bg-[#0A192F] rounded-lg shadow-lg fade-in-element delay-800 transition-all duration-300 transform hover:-translate-y-2 hover:bg-[#1a2d4a]">
-                        <div class="flex justify-center mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
-                                fill="none" stroke="#97e2c9" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10" />
-                                <circle cx="12" cy="12" r="6" />
-                                <circle cx="12" cy="12" r="2" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-normal text-slate-200 mb-3">Consultoria Estratégica</h3>
-                        <p class="text-slate-300 font-light mb-6">
-                            Desenvolvemos um plano de ação robusto e personalizado para o crescimento sustentável do seu
-                            negócio.
-                        </p>
-
-                    </div>
+                <div class="progress-bar">
+                    <div class="step" id="step1"></div>
+                    <div class="step" id="step2"></div>
+                    <div class="step" id="step3"></div>
                 </div>
             </div>
         </section>
@@ -349,33 +618,97 @@
         </section>
 
         <!-- Seção 5: Histórias de Sucesso -->
-        <section class="bg-[#0A192F] py-20 px-8 md:px-16" id="parceiros">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl text-slate-200 font-light fade-in-element">Histórias de Crescimento
-                        que Escrevemos Juntos</h2>
+        <section class="bg-[#0A192F] py-20" id="parceiros">
+            <div class="max-w-6xl mx-auto px-8 md:px-16 text-center mb-16">
+                <h2 class="text-3xl md:text-4xl text-slate-200 font-light fade-in-element">Histórias de Crescimento que
+                    Escrevemos Juntos</h2>
+            </div>
+            <div class="swiper mySwiper relative">
+                <div class="swiper-wrapper pb-12">
+                    <div class="swiper-slide">
+                        <div
+                            class="bg-[#112240] p-8 rounded-lg shadow-lg flex flex-col items-center text-center h-full max-w-md mx-auto">
+                            <img src="image/IMElogo.jpeg" alt="Clinica IME logo"
+                                class="w-24 h-24 rounded-full mb-6 border-2 border-[#64ffda]">
+                            <blockquote class="text-slate-300 font-light italic text-lg mb-4 flex-grow">“Gostaríamos de
+                                agradecer
+                                à Tz Consultoria pelo trabalho realizado em nossa clínica. A equipe nos apoiou em um
+                                projeto de desenvolvimento econômico fundamental para nossa fase de expansão,
+                                estruturando e captando créditos subsidiados que viabilizaram nossos investimentos. A
+                                dedicação, o profissionalismo e o cuidado em cada etapa fizeram toda a diferença.
+                                Parabéns à equipe da Tz pelo excelente trabalho!”</blockquote>
+                            <p class="text-slate-200 font-normal mt-auto">- Dr. Bruno Brito, sócio-proprietário da
+                                Clínica IME</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div
+                            class="bg-[#112240] p-8 rounded-lg shadow-lg flex flex-col items-center text-center h-full max-w-md mx-auto">
+                            <img src="image/nuamselogo.jpg" alt="Logo nuamse"
+                                class="w-24 h-24 rounded-full mb-6 border-2 border-[#64ffda]">
+                            <blockquote class="text-slate-300 font-light italic text-lg mb-4 flex-grow">“Temos muito a
+                                agradecer à
+                                Tz Consultoria pelo apoio estratégico que recebemos em nossa clínica. O trabalho da
+                                equipe foi essencial para estruturarmos nossa expansão e conquistarmos créditos
+                                subsidiados que fortaleceram nosso crescimento. A competência, a proximidade e a
+                                dedicação da Tz nos deram segurança em cada decisão. Agradecemos em especial ao
+                                consultor Thiago, que nos acompanhou de perto e foi fundamental em todo o processo.
+                                Recomendamos de olhos fechados!”</blockquote>
+                            <p class="text-slate-200 font-normal mt-auto">- Dr. Fellipe Guimarães e Dra. Cláudia Torres
+                                Guimarães, sócios da Clínica Nuamse</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div
+                            class="bg-[#112240] p-8 rounded-lg shadow-lg flex flex-col items-center text-center h-full max-w-md mx-auto">
+                            <img src="image/DOAembalagenslogo.jpeg" alt="Doa embalagens logo"
+                                class="w-24 h-24 rounded-full mb-6 border-2 border-[#64ffda]">
+                            <blockquote class="text-slate-300 font-light italic text-lg mb-4 flex-grow">“Nosso
+                                agradecimento
+                                especial à Tz Consultoria pelo excelente trabalho junto à nossa empresa. O suporte
+                                estratégico e a captação de créditos subsidiados foram fundamentais para impulsionar
+                                nossos projetos e garantir condições sólidas de crescimento. Destacamos também a
+                                dedicação e o profissionalismo do consultor Júnior, que nos acompanhou de perto em cada
+                                etapa, tornando o processo ainda mais seguro e eficiente. Parabéns à Tz pela
+                                excelência!”</blockquote>
+                            <p class="text-slate-200 font-normal mt-auto">- Diógenes Antunes, sócio da DOA Embalagens
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                    <div
-                        class="bg-[#112240] p-8 rounded-lg shadow-lg flex flex-col items-center text-center transition-transform transform hover:-translate-y-2 fade-in-element delay-400">
-                        <img src="https://placehold.co/100x100/0A192F/64ffda?text=Logo" alt="Logo da Empresa do Cliente"
-                            class="w-24 h-24 rounded-full mb-6 border-2 border-[#64ffda]">
-                        <blockquote class="text-slate-300 font-light italic text-lg mb-4">
-                            "Com a TZ Consultoria, saímos de um cenário de incerteza para um crescimento sustentável. O
-                            diagnóstico financeiro foi preciso e nos deu a segurança que precisávamos para expandir."
-                        </blockquote>
-                        <p class="text-slate-200 font-normal mt-auto">- João Santos, CEO da Empresa Exemplo</p>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </section>
+
+        <!-- Seção: bancos -->
+        <section class="bg-[#0A192F] py-20" id="logo-parceiros">
+            <div class="max-w-6xl mx-auto px-8 md:px-16 text-center">
+                <h2 class="text-3xl md:text-4xl text-slate-200 font-light mb-16 fade-in-element">Nossos Parceiros</h2>
+                <div class="swiper partnersSwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><img src="image/logoc6bank.png"
+                                alt="Logo C6 Bank"></div>
+                        <div class="swiper-slide"><img
+                                src="image/logocreditas.png"
+                                alt="Logo Creditas"></div>
+                        <div class="swiper-slide"><img
+                                src="image/logobancodaycoval.png"
+                                alt="Logo Banco Daycoval"></div>
+                        <div class="swiper-slide"><img
+                                src="image/logobancosofisa - Editado.png"
+                                alt="Logo Sofisa"></div>
+                        <div class="swiper-slide"><img src="image/Logo_Rodobens_Atualizado.png"
+                                alt="Logo Rodobens"></div>
+                        <div class="swiper-slide"><img
+                                src="image/logosantander.png"
+                                alt="Logo Santander"></div>
+                        <div class="swiper-slide"><img
+                                src="image/cashmelogo.png"
+                                alt="Logo CashMe"></div>
                     </div>
-                    <div
-                        class="bg-[#112240] p-8 rounded-lg shadow-lg flex flex-col items-center text-center transition-transform transform hover:-translate-y-2 fade-in-element delay-600">
-                        <img src="https://placehold.co/100x100/0A192F/64ffda?text=Foto" alt="Foto do Cliente"
-                            class="w-24 h-24 rounded-full mb-6 border-2 border-[#64ffda]">
-                        <blockquote class="text-slate-300 font-light italic text-lg mb-4">
-                            "O plano estratégico da TZ Consultoria me ajudou a organizar minhas finanças e me preparou
-                            para o meu próximo grande investimento. Hoje me sinto no controle do meu futuro."
-                        </blockquote>
-                        <p class="text-slate-200 font-normal mt-auto">- Maria Oliveira, Profissional Liberal</p>
-                    </div>
+                    <div class="swiper-pagination partners-pagination"></div>
                 </div>
             </div>
         </section>
@@ -569,6 +902,174 @@
         </div>
     </footer>
 
+    </main>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const swiper = new Swiper('.mySwiper', {
+
+                // 1. AQUI ESTÁ A CORREÇÃO PRINCIPAL
+                // Trocamos 'loop' por 'rewind' para o botão funcionar corretamente.
+                rewind: true,
+
+                // 2. centeredSlides agora é controlado por breakpoint para melhor alinhamento
+                centeredSlides: true,
+                grabCursor: true,
+                slidesPerView: 1.2,
+                spaceBetween: 20,
+
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                        centeredSlides: false, // Desativado para alinhar à esquerda
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 40,
+                        centeredSlides: false, // Desativado para alinhar à esquerda
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
+        const titleEl = document.getElementById('carouselTitle');
+        const titles = [
+            "Crédito Subsidiado",
+            "Diagnóstico Financeiro",
+            "Consultoria Estratégica"
+        ];
+        const steps = [
+            document.getElementById("step1"),
+            document.getElementById("step2"),
+            document.getElementById("step3")
+        ];
+        const radios = [
+            document.getElementById("item-1"),
+            document.getElementById("item-2"),
+            document.getElementById("item-3")
+        ];
+
+        function getCurrentIndex() {
+            return radios.findIndex(r => r.checked);
+        }
+
+        function updateCarousel(index) {
+            if (radios[index]) {
+                radios[index].checked = true;
+                titleEl.textContent = titles[index];
+
+                steps.forEach((el, i) => {
+                    el.classList.toggle("active", i === index);
+                });
+            }
+        }
+
+        // Inicialização - Começa no slide do meio (índice 1)
+        updateCarousel(1);
+
+        radios.forEach((radio, index) => {
+            radio.addEventListener('change', () => {
+                if (radio.checked) {
+                    updateCarousel(index);
+                }
+            });
+        });
+
+        steps.forEach((step, index) => {
+            step.addEventListener("click", () => {
+                updateCarousel(index);
+            });
+        });
+
+        // Lógica de arrastar (drag and drop)
+        const carousel = document.getElementById("carousel");
+        let dragStartX = 0;
+        let isDragging = false;
+        let currentIndex = 0;
+
+        function handleDragStart(clientX) {
+            dragStartX = clientX;
+            isDragging = true;
+            currentIndex = getCurrentIndex();
+            carousel.style.cursor = 'grabbing';
+        }
+
+        function handleDragMove(clientX) {
+            if (!isDragging) return;
+
+            const deltaX = clientX - dragStartX;
+            // Aumentei a sensibilidade para 50px
+            if (Math.abs(deltaX) > 50) {
+                if (deltaX > 0) { // Arrastou para a direita
+                    updateCarousel((currentIndex - 1 + 3) % 3);
+                } else { // Arrastou para a esquerda
+                    updateCarousel((currentIndex + 1) % 3);
+                }
+                isDragging = false; // Para a ação após um swipe
+            }
+        }
+
+        function handleDragEnd() {
+            isDragging = false;
+            carousel.style.cursor = 'grab';
+        }
+
+        // Eventos de Mouse
+        carousel.addEventListener('mousedown', (e) => handleDragStart(e.clientX));
+        carousel.addEventListener('mousemove', (e) => handleDragMove(e.clientX));
+        carousel.addEventListener('mouseup', handleDragEnd);
+        carousel.addEventListener('mouseleave', handleDragEnd);
+
+        // Eventos de Toque (Mobile)
+        carousel.addEventListener('touchstart', (e) => handleDragStart(e.touches[0].clientX));
+        carousel.addEventListener('touchmove', (e) => handleDragMove(e.touches[0].clientX));
+        carousel.addEventListener('touchend', handleDragEnd);
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const partnersSwiper = new Swiper('.partnersSwiper', {
+                loop: true,
+                slidesPerView: 2,
+                spaceBetween: 30,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.partners-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 3,
+                        spaceBetween: 40,
+                    },
+                    768: {
+                        slidesPerView: 4,
+                        spaceBetween: 50,
+                    },
+                    1024: {
+                        slidesPerView: 5,
+                        spaceBetween: 60,
+                    },
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
