@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário - TZ Consultoria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .progress-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: radial-gradient(closest-side, white 79%, transparent 80%),
+                conic-gradient(#0A192F 33%, #E5E7EB 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #0A192F;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100 text-slate-800">
+
+    <main class="min-h-screen flex items-center justify-center p-4 sm:p-8">
+
+        <div class="bg-white shadow-xl rounded-xl w-full max-w-2xl mx-auto p-6 sm:p-10">
+
+            <div class="flex items-center mb-8">
+                <div class="progress-circle mr-4 flex-shrink-0">
+                    <span>1/3</span>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-slate-500">Passo 1 de 3</p>
+                    <h1 class="text-2xl sm:text-3xl font-light text-slate-800">Suas informações</h1>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <p class="text-lg font-medium text-slate-500 mb-2">Valor do crédito</p>
+                <p id="loanAmountDisplay" class="text-4xl font-bold text-[#0A192F]"></p>
+            </div>
+
+            <form id="contactForm" class="space-y-6" novalidate>
+                <div>
+                    <label for="fullName" class="block text-sm font-medium text-slate-600 mb-1">Nome completo</label>
+                    <input type="text" id="fullName" name="Nome" placeholder="Digite seu nome"
+                        class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#0A192F] focus:border-[#0A192F] transition-colors"
+                        required>
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-slate-600 mb-1">E-mail</label>
+                    <input type="email" id="email" name="E-mail" placeholder="Digite seu e-mail"
+                        class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#0A192F] focus:border-[#0A192F] transition-colors"
+                        required>
+                </div>
+
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-slate-600 mb-1">Celular</label>
+                    <input type="tel" id="phone" name="Telefone" placeholder="(11) 91234-5678"
+                        class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#0A192F] focus:border-[#0A192F] transition-colors"
+                        required>
+                    <p class="text-xs text-slate-400 mt-1">Utilizamos o WhatsApp como uma das nossas formas de contato
+                        com você.</p>
+                </div>
+
+                <div>
+                    <label for="cnpj" class="block text-sm font-medium text-slate-600 mb-1">CNPJ</label>
+                    <input type="text" id="cnpj" name="CNPJ" placeholder="00.000.000/0000-00"
+                        class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#0A192F] focus:border-[#0A192F] transition-colors"
+                        required>
+                </div>
+
+                <div class="pt-4">
+                    <h3 class="text-base font-normal text-slate-800 mb-4">Critérios para o empréstimo</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 mt-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="12" x2="12" y1="8" y2="12" />
+                                    <line x1="12" x2="12.01" y1="16" y2="16" />
+                                </svg>
+                            </div>
+                            <p class="ml-3 text-sm text-slate-600 font-light">Ter, no mínimo, 24 meses de CNPJ ativo.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 mt-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="12" x2="12" y1="8" y2="12" />
+                                    <line x1="12" x2="12.01" y1="16" y2="16" />
+                                </svg>
+                            </div>
+                            <p class="ml-3 text-sm text-slate-600 font-light">Não ter restrições no nome da empresa e/ou dos sócios.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 mt-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="12" x2="12" y1="8" y2="12" />
+                                    <line x1="12" x2="12.01" y1="16" y2="16" />
+                                </svg>
+                            </div>
+                            <p class="ml-3 text-sm text-slate-600 font-light">Possuir faturamento mínimo de R$ 500 mil ao ano.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 mt-0.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-circle-alert-icon lucide-circle-alert">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="12" x2="12" y1="8" y2="12" />
+                                    <line x1="12" x2="12.01" y1="16" y2="16" />
+                                </svg>
+                            </div>
+                            <p class="ml-3 text-sm text-slate-600 font-light">Não temos linha de crédito para MEI.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex items-start pt-4">
+                    <input type="checkbox" id="consent" name="Consentimento"
+                        class="mt-1 h-4 w-4 rounded border-gray-300 text-[#0A192F] focus:ring-[#0A192F]" required>
+                    <label for="consent" class="text-sm text-slate-500 ml-3">Concordo que este site armazene minhas
+                        informações e que possam me contatar por e-mail, WhatsApp, SMS e telefone.</label>
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-[#0A192F] text-white font-bold py-3 px-8 rounded-md hover:bg-[#1a2d4a] transition-all duration-300 mt-6">
+                    Continuar
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/imask"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const loanAmount = urlParams.get('valor');
+            const loanAmountDisplay = document.getElementById('loanAmountDisplay');
+
+            const formatCurrency = (value) => {
+                if (!value) return "R$ 0";
+                return parseInt(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            };
+
+            loanAmountDisplay.textContent = formatCurrency(loanAmount);
+
+            // Seleção de elementos do formulário
+            const contactForm = document.getElementById('contactForm');
+            const phoneInput = document.getElementById('phone');
+            const cnpjInput = document.getElementById('cnpj');
+
+            // Aplicação de máscaras
+            const phoneMask = IMask(phoneInput, { mask: '(00) 00000-0000' });
+            const cnpjMask = IMask(cnpjInput, { mask: '00.000.000/0000-00' });
+
+            // Evento de submit do formulário
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Validações
+                const emailInput = document.getElementById('email');
+                const emailPattern = /^\S+@\S+\.\S+$/;
+                if (!contactForm.checkValidity()) {
+                    alert('Por favor, preencha todos os campos obrigatórios.');
+                    return;
+                }
+                if (!emailPattern.test(emailInput.value)) {
+                    alert('Por favor, digite um endereço de e-mail válido.');
+                    return;
+                }
+                if (phoneMask.unmaskedValue.length !== 11) {
+                    alert('Por favor, preencha o número de celular completo.');
+                    return;
+                }
+                if (cnpjMask.unmaskedValue.length !== 14) {
+                    alert('Por favor, preencha o CNPJ completo.');
+                    return;
+                }
+
+                // Coleta de dados
+                const fullName = document.getElementById('fullName').value;
+                const consent = document.getElementById('consent').checked;
+
+                // Navegação para a próxima página
+                const nextUrl = `simulador-form-empresa.html?valor=${loanAmount}&nome=${encodeURIComponent(fullName)}&email=${encodeURIComponent(emailInput.value)}&telefone=${encodeURIComponent(phoneMask.unmaskedValue)}&cnpj=${encodeURIComponent(cnpjMask.unmaskedValue)}&consentimento=${consent}`;
+                window.location.href = nextUrl;
+            });
+        });
+    </script>
+</body>
+
+</html>

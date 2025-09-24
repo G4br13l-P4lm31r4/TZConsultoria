@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Empréstimo - TZ Consultoria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f0f2f5; /* Fundo geral claro, se necessário */
+        }
+
+        /* --- Estilo do Slider (Controle Deslizante) --- */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px; /* Altura da barra */
+            background: #e5e7eb; /* Cor da barra de fundo (cinza claro) */
+            border-radius: 5px;
+            outline: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* --- Barra de progresso (a parte azul clara) --- */
+        input[type=range] {
+            /* O truque é usar um gradiente que muda de posição com JS */
+            background: linear-gradient(to right, #0063f7 0%, #0063f7 var(--progress-percent, 0%), #e5e7eb 0%, #e5e7eb 100%);
+        }
+
+        /* --- Bolinha do Slider para Chrome/Safari --- */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            background: #0063f7; /* Cor da bolinha: verde-água original */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            margin-top: -8px; /* Centraliza a bolinha na barra */
+        }
+        
+        /* --- Bolinha do Slider para Firefox --- */
+        input[type=range]::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            background: #0063f7; /* Cor da bolinha: verde-água original */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-[#0A192F] text-slate-800">
+
+    <header class="bg-white text-slate-400 fixed w-full top-0 z-50 shadow-sm">
+        <nav x-data="{ open: false }" class="container mx-auto px-4 sm:px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html">
+                    <img src="image/logosemfundo.png" alt="Logo da TZ Consultoria" class="h-10 w-auto">
+                </a>
+                <div class="hidden md:flex space-x-6 text-[#0A192F] font-medium">
+                    <a href="index.html#hero" class="hover:text-[#64ffda] transition-colors">Início</a>
+                </div>
+                <button @click="open = !open" class="md:hidden text-[#0A192F] focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+            <div x-show="open" x-transition class="md:hidden mt-4 space-y-2 bg-[#112240] p-4 rounded-md shadow-lg">
+                <a href="index.html#hero" class="block py-2 text-slate-200 hover:text-[#64ffda]">Início</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="min-h-screen flex lg:flex-row pt-16"> <div class="w-full lg:w-1/2 min-h-[50vh] lg:min-h-screen bg-cover bg-center p-8 md:p-16 flex flex-col justify-center text-white relative"
+            style="background-image: url('https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <div class="absolute inset-0 bg-[#0A192F] opacity-70"></div> 
+            <div class="relative z-10">
+                <p class="text-sm font-light tracking-widest text-[#64ffda] uppercase mb-4">CRÉDITO PJ</p>
+                <h1 class="text-4xl md:text-5xl font-light leading-tight tracking-tight mb-6">Empréstimo empresarial</h1>
+                <p class="md:text-lg max-w-lg font-light">Rápido, Seguro e 100% Online. Capital de giro com juros baixos e sem burocracia.</p>
+            </div>
+        </div>
+
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-8 relative bg-transparent z-20">
+            <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md mx-auto">
+                <form id="simulationForm">
+                    <div class="mb-8 text-center">
+                        <label for="loanAmount" class="text-base font-medium text-slate-500">Valor do crédito</label>
+                        <span id="loanAmountValue" class="block text-4xl lg:text-5xl font-bold text-[#0A192F] mt-1">R$ 1.050.000</span>
+                    </div>
+
+                    <div class="mb-8">
+                        <input type="range" id="loanAmount" name="loanAmount" min="50000" max="15000000" step="10000" value="50000" class="w-full">
+                        <div class="flex justify-between text-xs text-slate-500 mt-2">
+                            <span>R$ 50 mil</span>
+                            <span>R$ 15 milhões</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-center text-sm text-slate-500 mb-6">Iniciar busca pela melhor proposta nas condições selecionadas</p>
+
+                    <button type="submit" class="w-full bg-[#0A192F] text-white font-bold py-3 px-6 rounded-lg hover:bg-[#1a2d4a] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#64ffda] focus:ring-opacity-50">
+                        Buscar as melhores taxas
+                    </button>
+
+                    <p class="text-center text-xs text-slate-400 mt-4">Todas as operações estão sujeitas a análise e aprovação de crédito.</p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const simulationForm = document.getElementById('simulationForm');
+            const loanAmountSlider = document.getElementById('loanAmount');
+            const loanAmountValue = document.getElementById('loanAmountValue');
+
+            const formatCurrency = (value) => {
+                return parseInt(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            };
+
+            const updateSliderProgress = (slider) => {
+                const min = parseInt(slider.min);
+                const max = parseInt(slider.max);
+                const value = parseInt(slider.value);
+                const percentage = ((value - min) / (max - min)) * 100;
+                slider.style.setProperty('--progress-percent', `${percentage}%`);
+            };
+
+            const updateSimulation = () => {
+                loanAmountValue.textContent = formatCurrency(loanAmountSlider.value);
+                updateSliderProgress(loanAmountSlider);
+            };
+
+            // Inicializa o slider e o valor
+            updateSimulation();
+
+            loanAmountSlider.addEventListener('input', updateSimulation);
+
+            simulationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const loanAmount = loanAmountSlider.value;
+                window.location.href = `simulador-form-contato.html?valor=${loanAmount}`;
+            });
+        });
+    </script>
+
+</body>
+</html>
