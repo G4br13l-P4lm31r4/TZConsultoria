@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados da Empresa - TZ Consultoria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/simulador-form-empresa.css">
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <main class="min-h-screen flex items-center justify-center p-4 sm:p-8">
+        <div class="bg-white shadow-xl rounded-xl w-full max-w-2xl mx-auto p-6 sm:p-10">
+            
+            <div class="flex items-center mb-8">
+                <div class="progress-circle mr-4 flex-shrink-0">
+                    <span>2/3</span>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-slate-500">Passo 2 de 3</p>
+                    <h1 class="text-2xl sm:text-3xl font-light text-slate-800">Dados da Empresa</h1>
+                </div>
+            </div>
+
+            <form id="companyForm" class="space-y-6" novalidate>
+                <div>
+                    <label for="companyName" class="block text-sm font-medium text-slate-600 mb-1">Empresa</label>
+                    <input type="text" id="companyName" name="Empresa" placeholder="Razão Social completa" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                </div>
+                <div>
+                    <label for="cnpj" class="block text-sm font-medium text-slate-600 mb-1">CNPJ</label>
+                    <input type="text" id="cnpj" name="CNPJ" placeholder="00.000.000/0000-00" class="w-full border border-slate-300 rounded-md p-3 bg-slate-100 cursor-not-allowed" readonly>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="cep" class="block text-sm font-medium text-slate-600 mb-1">CEP</label>
+                        <input type="text" id="cep" name="CEP" placeholder="00000-000" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                    </div>
+                    <div>
+                        <label for="uf" class="block text-sm font-medium text-slate-600 mb-1">UF</label>
+                        <input type="text" id="uf" name="UF" placeholder="SP" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="city" class="block text-sm font-medium text-slate-600 mb-1">Cidade</label>
+                    <input type="text" id="city" name="Cidade" placeholder="Nome da cidade" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                </div>
+                <div>
+                    <label for="address" class="block text-sm font-medium text-slate-600 mb-1">Endereço</label>
+                    <input type="text" id="address" name="Endereço" placeholder="Rua, avenida, etc." class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="number" class="block text-sm font-medium text-slate-600 mb-1">Número</label>
+                        <input type="text" id="number" name="Número" placeholder="123" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors" required>
+                    </div>
+                    <div>
+                        <label for="complement" class="block text-sm font-medium text-slate-600 mb-1">Complemento</label>
+                        <input type="text" id="complement" name="Complemento" placeholder="Opcional" class="w-full border border-slate-300 rounded-md p-3 focus:ring-[#64ffda] focus:border-[#64ffda] transition-colors">
+                    </div>
+                </div>
+                
+                <button type="submit" class="w-full bg-[#0A192F] text-white font-bold py-3 px-8 rounded-md hover:bg-[#1a2d4a] transition-all duration-300 mt-6">
+                    Continuar
+                </button>
+            </form>
+        </div>
+    </main>
+    
+    <script src="https://unpkg.com/imask"></script>
+    <script src="/js/simulador-form-empresa.js"></script>
+</body>
+</html>

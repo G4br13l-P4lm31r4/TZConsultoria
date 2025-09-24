@@ -1,0 +1,356 @@
+ html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0A192F;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-element {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-600 {
+            animation-delay: 0.6s;
+        }
+
+        .delay-800 {
+            animation-delay: 0.8s;
+        }
+
+        .delay-1000 {
+            animation-delay: 1.0s;
+        }
+
+        /* Custom styles for the gradient overlay */
+        .image-gradient-overlay {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-gradient-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Gradiente simplificado para uma transição suave */
+            background: linear-gradient(to right,
+                    rgba(10, 25, 47, 1) 0%,
+                    rgba(10, 25, 47, 0.3) 50%,
+                    rgba(10, 25, 47, 0) 75%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Garante que o container do Swiper ocupe a largura correta */
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Alinha o conteúdo do slide no topo, caso tenham alturas diferentes */
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        /* Cor das setas de navegação */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #64ffda !important;
+            transition: transform 0.2s ease;
+        }
+
+        /* Efeito de escala ao passar o mouse sobre as setas */
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            transform: scale(1.2);
+        }
+
+        /* Cor da bolinha de paginação ativa */
+        .swiper-pagination-bullet-active {
+            background-color: #64ffda !important;
+        }
+
+        /* Cor das bolinhas inativas */
+        .swiper-pagination-bullet {
+            background-color: #A8B2D1;
+        }
+
+        /* Estilos para o novo carrossel de serviços */
+        .servicesSwiper {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .servicesSwiper .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 300px;
+            /* Largura dos slides laterais */
+            height: 400px;
+            /* Altura dos slides laterais */
+            transition: transform 0.5s ease;
+        }
+
+        .servicesSwiper .swiper-slide-active {
+            transform: scale(1.15);
+            /* Aumenta o slide central */
+            z-index: 10;
+        }
+
+        .card-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .group:hover .card-image {
+            transform: scale(1.10);
+        }
+
+        .card-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* ============================================== */
+        /* CSS FINAL BASEADO NO SITE MODELO */
+        /* ============================================== */
+        input[type=radio] {
+            display: none;
+        }
+
+        .container-modelo {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .cards {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            /* Largura do card central */
+            aspect-ratio: 3 / 4;
+            /* Proporção do card */
+            margin-bottom: 20px;
+            perspective: 800px;
+            /* Adiciona perspectiva para o efeito 3D */
+        }
+
+        .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s ease;
+            cursor: pointer;
+            display: flex;
+            /* Para centralizar conteúdo */
+            align-items: flex-end;
+            /* Alinha na base */
+            justify-content: center;
+            text-align: center;
+            border-radius: 1rem;
+            /* rounded-xl */
+            overflow: hidden;
+        }
+
+        .card img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .card::after {
+            /* Overlay escuro */
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 50%);
+            z-index: 2;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 3;
+            color: white;
+            padding: 1.5rem;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+        }
+
+        .button-wrapper {
+            display: none;
+            /* Oculto por padrão */
+            margin-top: 1rem;
+        }
+
+        .saiba-mais-btn {
+            display: inline-block;
+            background-color: white;
+            color: black;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            /* rounded-full */
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .saiba-mais-btn:hover {
+            background-color: #e2e8f0;
+            /* gray-200 */
+        }
+
+        /* A LÓGICA DO CARROSSEL COM CSS */
+        #item-1:checked~.cards #card-3,
+        #item-2:checked~.cards #card-1,
+        #item-3:checked~.cards #card-2 {
+            transform: translateX(-85%) scale(0.8);
+            z-index: 0;
+        }
+
+        #item-1:checked~.cards #card-2,
+        #item-2:checked~.cards #card-3,
+        #item-3:checked~.cards #card-1 {
+            transform: translateX(85%) scale(0.8);
+            z-index: 0;
+        }
+
+        #item-1:checked~.cards #card-1,
+        #item-2:checked~.cards #card-2,
+        #item-3:checked~.cards #card-3 {
+            transform: translateX(0) scale(1);
+            z-index: 1;
+        }
+
+        /* Mostra o botão apenas no card ativo */
+        #item-1:checked~.cards #card-1 .button-wrapper,
+        #item-2:checked~.cards #card-2 .button-wrapper,
+        #item-3:checked~.cards #card-3 .button-wrapper {
+            display: block;
+        }
+
+        /* BARRA DE PROGRESSO */
+        .progress-bar {
+            display: flex;
+            width: 100%;
+            max-width: 400px;
+            gap: 0.5rem;
+            /* gap-2 */
+            margin-top: 2.5rem;
+            /* mt-10 */
+        }
+
+        .step {
+            flex: 1;
+            height: 4px;
+            background-color: #4a5a76;
+            /* Cor inativa */
+            border-radius: 2px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .step.active {
+            background-color: #64ffda;
+            /* Sua cor ativa */
+        }
+
+        /* ============================================== */
+        /* CSS PARA O CARROSSEL DE PARCEIROS */
+        /* ============================================== */
+        .partnersSwiper {
+            width: 100%;
+            height: 100px;
+            /* Altura do container */
+        }
+
+        .partnersSwiper .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .partnersSwiper .swiper-slide img {
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
+            filter: grayscale(100%) contrast(0.8);
+            /* Tons de cinza e menos contraste */
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .partnersSwiper .swiper-slide img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .partners-pagination .swiper-pagination-bullet {
+            background-color: #A8B2D1;
+            /* Cor inativa */
+        }
+
+        .partners-pagination .swiper-pagination-bullet-active {
+            background-color: #64ffda !important;
+            /* Cor ativa */
+        }

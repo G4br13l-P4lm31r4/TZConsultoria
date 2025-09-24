@@ -1,0 +1,20 @@
+  body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .progress-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: radial-gradient(closest-side, white 79%, transparent 80%),
+                conic-gradient(#0A192F 33%, #E5E7EB 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #0A192F;
+        }
