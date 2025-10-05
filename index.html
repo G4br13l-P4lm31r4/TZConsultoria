@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/css/index.css">
     <!-- Alpine.js for interactivity -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
+
 
 </head>
 
@@ -33,41 +33,34 @@
                 </a>
 
                 <!-- Menu Desktop -->
-                <nav class="hidden md:flex space-x-8 text-[#0A192F]">
+                <nav class="hidden md:flex items-center space-x-8 text-[#0A192F]">
                     <a href="#hero" class="hover:text-[#97e2c9] transition-colors">Início</a>
                     <a href="#sobre" class="hover:text-[#97e2c9] transition-colors">Sobre</a>
-                    <a href="#servicos" class="hover:text-[#97e2c9] transition-colors">Serviços</a>
-                    <a href="#diferenciais" class="hover:text-[#97e2c9] transition-colors">Diferenciais</a>
-                    <a href="#parceiros" class="hover:text-[#97e2c9] transition-colors">Parceiros</a>
-                    <a href="#faq" class="hover:text-[#97e2c9] transition-colors">FAQ</a>
-                    <a href="#instagram" class="hover:text-[#97e2c9] transition-colors">Redes</a>
+                    <a href="simulador.html"
+                        class="inline-block bg-[#97e2c9] border border-[#97e2c9] font-bold py-2 px-5 rounded-md hover:bg-[#86c9b3] transition-colors duration-300 text-sm">
+                        Simular Empréstimo
+                    </a>
                 </nav>
 
                 <!-- Botão Mobile -->
-                <button id="menu-btn" class="md:hidden text-slate-200 focus:outline-none">
-                    <!-- Ícone hambúrguer -->
-                    <svg style="color: #0A192F;" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                        viewBox="0 0 24 24">
+                <button id="menu-btn"
+                    class="md:hidden text-[#0A192F] hover:text-[#97e2c9] transition-colors focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
 
             <!-- Menu Mobile -->
-            <nav id="mobile-menu" style="color: #0A192F;" class="hidden md:hidden bg-white px-6 pb-4 text-[#0A192F]">
-                <a href="#hero" style="color: #0A192F;"
-                    class="block py-2 text-slate-200 hover:text-[#0A192F]">Início</a>
-                <a href="#sobre" style="color: #0A192F;"
-                    class="block py-2 text-slate-200 hover:text-[#0A192F]">Sobre</a>
-                <a href="#servicos" style="color: #0A192F;"
-                    class="block py-2 text-slate-200 hover:text-[#0A192F]">Serviços</a>
-                <a href="#diferenciais" style="color: #0A192F;"
-                    class="block py-2 text-slate-200 hover:text-[#0A192F]">Diferenciais</a>
-                <a href="#parceiros" style="color: #0A192F;"
-                    class="block py-2 text-slate-200 hover:text-[#0A192F]">Parceiros</a>
-                <a href="#faq" style="color: #0A192F;" class="block py-2 text-slate-200 hover:text-[#0A192F]">faq</a>
-                <a href="#instagram" style="color: #0A192F;"
-                    class="block py-2 text-slate-200 hover:text-[#0A192F]">Redes</a>
+            <nav id="mobile-menu" class="hidden md:hidden bg-white px-6 py-4 space-y-4">
+                <a href="#hero" class="block text-[#0A192F] hover:text-[#97e2c9] transition-colors">Início</a>
+                <a href="#sobre" class="block text-[#0A192F] hover:text-[#97e2c9] transition-colors">Sobre</a>
+                <div class="pt-4">
+                    <a href="simulador.html"
+                        class="block text-center bg-[#97e2c9] text-[#0A192F] font-bold py-3 px-5 rounded-md hover:bg-[#86c9b3] transition-colors duration-300 text-sm">
+                        Simular Empréstimo
+                    </a>
+                </div>
             </nav>
         </header>
 
@@ -80,15 +73,16 @@
                 </p>
                 <h1
                     class="text-xl sm:text-3xl md:text-5xl text-slate-200 font-light leading-tight tracking-tight mb-4 sm:mb-6">
-                    Seu Próximo Salto <span class="text-[#97e2c9] font-extralight">Financeiro</span> Começa Aqui.
+                    Seu banco mostra um caminho. <p></p> <span class="text-[#97e2c9] font-extralight"> A TZ revela
+                        todos.</span>
                 </h1>
                 <p class="text-xs sm:text-base md:text-lg font-light mb-6 sm:mb-8 text-slate-300">
-                    A consultoria financeira que transforma a gestão de empresas e a vida de profissionais liberais.
-                    Não é sobre planilhas, é sobre o seu futuro.
+                    A verdadeira transformação financeira vem das melhores escolhas. Por isso, comparamos e negociamos
+                    com os principais parceiros do mercado para garantir as condições ideais para o seu crescimento.
                 </p>
                 <div class="flex flex-wrap gap-3 sm:gap-4">
                     <a href="simulador.html"
-                        class="inline-block bg-transparent border border-[#97e2c9] text-[#97e2c9] font-normal py-2 px-4 sm:py-3 sm:px-8 rounded-md hover:bg-[#97e2c9]/10 transition-all duration-300">
+                        class="inline-block bg-white border border-white text-[#00ff99] font-bold text-xl py-3 px-10 sm:py-4 sm:px-12 rounded-md hover:bg-white/90 transition-all duration-300">
                         Simular Empréstimo
                     </a>
                 </div>
@@ -313,7 +307,8 @@
         <!-- Seção: bancos -->
         <section class="bg-[#FFFFFF] py-20" id="logo-parceiros">
             <div class="max-w-6xl mx-auto px-8 md:px-16 text-center">
-                <h2 style="color: #0A192F;" class="text-3xl md:text-4xl text-slate-200 font-light mb-16 fade-in-element">Nossos Parceiros</h2>
+                <h2 style="color: #0A192F;"
+                    class="text-3xl md:text-4xl text-slate-200 font-light mb-16 fade-in-element">Nossos Parceiros</h2>
                 <div class="swiper partnersSwiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide"><img src="image/logoc6bank.png" alt="Logo C6 Bank"></div>
@@ -482,11 +477,8 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="#hero" class="hover:text-[#64ffda] transition-colors">Início</a></li>
                         <li><a href="#sobre" class="hover:text-[#64ffda] transition-colors">Sobre</a></li>
-                        <li><a href="#servicos" class="hover:text-[#64ffda] transition-colors">Serviços</a></li>
-                        <li><a href="#diferenciais" class="hover:text-[#64ffda] transition-colors">Diferenciais</a></li>
-                        <li><a href="#parceiros" class="hover:text-[#64ffda] transition-colors">Parceiros</a></li>
-                        <li><a href="#faq" class="hover:text-[#64ffda] transition-colors">FAQ</a></li>
-                        <li><a href="#redes" class="hover:text-[#64ffda] transition-colors">Redes</a></li>
+                        <li><a href="simulador.html" class="hover:text-[#64ffda] transition-colors">Simular
+                                Empréstimo</a></li>
                     </ul>
                 </div>
                 <div>
@@ -521,7 +513,22 @@
                 </div>
             </div>
             <div class="border-t border-slate-700 pt-8 mt-8 text-center text-sm">
-                <p>© 2025 TZ Consultoria - CNPJ 42.030.648/0001-50 - Todos os direitos reservados.</p>
+                <p class="text-slate-400">
+                    © 2025 TZ Consultoria - CNPJ 42.030.648/0001-50 - Todos os direitos reservados.
+                </p>
+
+                <div class="mt-4">
+                    <a href="/politica-de-privacidade.html"
+                        class="text-slate-400 hover:text-[#97e2c9] transition-colors">
+                        Política de Privacidade
+                    </a>
+
+                    <span class="mx-2 text-slate-500">|</span>
+
+                    <a href="/termos-de-uso.html" class="text-slate-400 hover:text-[#97e2c9] transition-colors">
+                        Termos de Uso
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
